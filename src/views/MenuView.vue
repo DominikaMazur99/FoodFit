@@ -1,12 +1,16 @@
 <template>
-  <div>
-        <h1>Hej, to główny widok!</h1>
-    </div>
+    <menu-nav></menu-nav>
 </template>
 
-<script setup>
+<script>
+import MenuNavigation from "../components/menu/MenuNavigation.vue";
+export default {
+    components: {
+        "menu-nav": MenuNavigation,
+    },
+};
 </script>
 
-<style >
+<style>
 /* Styl komponentu może być umieszczony tutaj */
 </style>
