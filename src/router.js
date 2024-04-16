@@ -19,9 +19,9 @@ export default createRouter({
             component: () => import("./views/MenuView.vue"),
         },
         {
-            path: "/dziennik_posilkow",
-            name: "MealsJournalView",
-            component: () => import("./views/MealsJournalView.vue"),
+            path: "/zapotrzebowanie_kaloryczne",
+            name: "CaloricDemandView",
+            component: () => import("./views/CaloricDemandView.vue"),
         },
     ],
 });
