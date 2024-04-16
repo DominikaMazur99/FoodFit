@@ -61,7 +61,11 @@
             ></select-component>
         </div>
         <div>
-            <submit-button name="Oblicz"></submit-button>
+            <submit-button
+                name="Oblicz"
+                minWidthBtn="104px"
+                minHeightBtn="43px"
+            ></submit-button>
         </div>
         <div
             :style="{

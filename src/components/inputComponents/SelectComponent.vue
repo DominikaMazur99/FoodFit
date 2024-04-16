@@ -12,6 +12,7 @@
                 <option :value="placeholder" disabled selected>
                     {{ placeholder }}
                 </option>
+
                 <option
                     v-for="(option, index) in options"
                     :key="index"
@@ -103,5 +104,7 @@ export default {
     box-sizing: border-box;
     height: auto;
     border-radius: 10px;
+    color: #2f7d28;
+    font-weight: lighter;
 }
 </style>

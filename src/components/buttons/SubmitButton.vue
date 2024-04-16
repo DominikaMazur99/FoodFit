@@ -1,5 +1,14 @@
 <template>
-    <button class="submit-btn" @click="handleClick">{{ name }}</button>
+    <button
+        class="submit-btn"
+        @click="handleClick"
+        :style="{
+            width: minWidthBtn, // Użyj propa minWidthBtn
+            height: minHeightBtn, // Użyj propa minHeightBtn
+        }"
+    >
+        {{ name }}
+    </button>
 </template>
 
 <script>
@@ -13,6 +22,14 @@ export default {
             type: Function,
             default: () => {}, // domyślna pusta funkcja
         },
+        minWidthBtn: {
+            type: String,
+            default: "150px",
+        },
+        minHeightBtn: {
+            type: String,
+            default: "31px",
+        },
     },
     methods: {
         handleClick() {
@@ -24,17 +41,19 @@ export default {
 
 <style scoped>
 .submit-btn {
-    height: 31px;
-    width: 122px;
+    height: auto;
+    width: auto;
     border-radius: 30px;
     border: none;
     background-color: #baccac;
     color: #2f7d28;
     font-weight: bold;
+    padding: 10px 20px;
+    transition: transform 0.3s;
 }
 
 .submit-btn:hover {
-    scale: 1.1;
+    transform: scale(1.1);
     cursor: pointer;
 }
 </style>
