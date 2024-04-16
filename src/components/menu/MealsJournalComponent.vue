@@ -71,7 +71,7 @@
             :style="{
                 alignItems: 'center',
                 marginTop: '1rem',
-                fontWeight: 'lighter', // Poprawiłem textWeight na fontWeight i dodałem cudzysłów wokół 'light'
+                fontWeight: 'lighter',
                 fontSize: '24px',
             }"
         >
@@ -81,7 +81,7 @@
         <div
             :style="{
                 alignItems: 'center',
-                fontWeight: 'lighter', // Poprawiłem textWeight na fontWeight i dodałem cudzysłów wokół 'light'
+                fontWeight: 'lighter',
                 fontSize: '32px',
             }"
         >
