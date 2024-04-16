@@ -7,7 +7,11 @@
                 :id="name"
                 v-model="selectedValue"
                 @change="emitChange"
+                :style="{ minWidth: computedMinWidth }"
             >
+                <option :value="placeholder" disabled selected>
+                    {{ placeholder }}
+                </option>
                 <option
                     v-for="(option, index) in options"
                     :key="index"
@@ -31,6 +35,10 @@ export default {
             type: String,
             default: "",
         },
+        placeholder: {
+            type: String,
+            default: "",
+        },
         options: {
             type: Array,
             default: () => [],
@@ -39,15 +47,23 @@ export default {
             // Prop to pass the initial selected value
             required: false,
         },
+        minWidth: {
+            type: String,
+            default: "150px",
+        },
     },
     data() {
         return {
-            selectedValue: this.value || null, // Initialize selected value
+            selectedValue: this.value || this.placeholder,
         };
+    },
+    computed: {
+        computedMinWidth() {
+            return this.minWidth;
+        },
     },
     methods: {
         emitChange() {
-            // Emit change event with the selected value
             this.$emit("change", this.selectedValue);
         },
     },
@@ -75,13 +91,17 @@ export default {
     text-align: left;
 }
 
+/* Styl dla koloru placeholdera */
+.select-field select::placeholder {
+    color: green; /* Zmiana koloru placeholdera na zielony */
+}
+
 .select-field select {
     padding: 0.5rem;
     font-size: 1rem;
     border: 1px solid #ccc;
     box-sizing: border-box;
     height: auto;
-    min-width: 150px;
     border-radius: 10px;
 }
 </style>

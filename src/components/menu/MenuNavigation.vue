@@ -4,8 +4,8 @@
             <app-name></app-name>
         </div>
         <div class="btn-box">
-            <menu-btn name="Zapotrzebowanie kaloryczne"></menu-btn>
             <menu-btn name="Dziennik posiłków i aktywności"></menu-btn>
+            <menu-btn name="Zapotrzebowanie kaloryczne"></menu-btn>
             <menu-btn name="Postępy"></menu-btn>
             <menu-btn name="Wyloguj"></menu-btn>
         </div>

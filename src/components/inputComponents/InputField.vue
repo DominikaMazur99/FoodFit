@@ -55,10 +55,11 @@ export default {
 <style scoped>
 .input-field {
     margin-bottom: 1rem;
-    align-items: center; /* Wyśrodkowanie w pionie */
-    display: flex; /* Ustawienie kontenera jako flexbox */
-    justify-content: center; /* Wyśrodkowanie w poziomie */
-    flex-direction: column; /* Ustawienie kierunku flexbox na kolumnę */
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex: 1; /* Allow input fields to grow and shrink as needed */
 }
 
 .box {
@@ -78,8 +79,8 @@ export default {
     font-size: 1rem;
     border: 1px solid #ccc;
     box-sizing: border-box;
-    height: 46px;
-    width: 230px;
+    min-height: auto;
+    width: 100%; /* Take up full width available in the parent container */
     border-radius: 10px;
 }
 </style>
