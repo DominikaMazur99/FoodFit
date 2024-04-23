@@ -1,7 +1,7 @@
 <template>
     <div class="common-box">
         <div class="app-name">
-            <app-name></app-name>
+                <app-name></app-name> 
         </div>
         <div
             :style="{

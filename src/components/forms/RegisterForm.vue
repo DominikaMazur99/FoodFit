@@ -18,8 +18,10 @@
         ></input-field>
         <input-field name="email" label="Email"></input-field>
 
-        <button-login name="Zarejestruj"></button-login>
-        <p class="message-text">Posiadasz już konto? Zaloguj się!</p>
+        <router-link to="/">
+            <button-login name="Zarejestruj"></button-login>
+        </router-link>
+        <p class="message-text"><router-link to="/">Posiadasz już konto? Zaloguj się!</router-link></p>
     </div>
 </template>
 

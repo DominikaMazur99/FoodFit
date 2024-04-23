@@ -5,9 +5,15 @@
         </div>
         <div class="btn-box">
             <menu-btn name="Dziennik posiłków i aktywności"></menu-btn>
-            <menu-btn name="Zapotrzebowanie kaloryczne"></menu-btn>
+            <router-link to="/zapotrzebowanie_kaloryczne">
+                <menu-btn name="Zapotrzebowanie kaloryczne"></menu-btn>
+            </router-link>
+            
             <menu-btn name="Postępy"></menu-btn>
-            <menu-btn name="Wyloguj"></menu-btn>
+            
+            <router-link to="/">
+                <menu-btn name="Wyloguj"></menu-btn>
+            </router-link>
         </div>
     </div>
 </template>

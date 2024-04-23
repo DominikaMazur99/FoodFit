@@ -70,8 +70,9 @@ export default {
     display: block;
     margin-bottom: 0.5rem;
     color: #2f7d28;
-    font-weight: lighter;
+    font-weight: 300;
     text-align: left;
+
 }
 
 .input-field input {

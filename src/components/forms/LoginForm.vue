@@ -11,10 +11,10 @@
             label="Hasło"
             type="password"
         ></input-field>
-        <button-login name="Zaloguj"></button-login>
-        <p class="message-text">
-            Nie posiadasz jeszcze konta? Zarejestruj się!
-        </p>
+        <router-link to="/menu">
+            <button-login name="Zaloguj"></button-login>
+        </router-link>
+        <p class="message-text"><router-link to="/rejestracja">Nie posiadasz jeszcze konta? Zarejestruj się!</router-link></p>
     </div>
 </template>
 
