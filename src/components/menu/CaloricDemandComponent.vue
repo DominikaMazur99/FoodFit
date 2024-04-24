@@ -1,7 +1,7 @@
 <template>
     <div class="common-box">
         <div class="app-name">
-                <app-name></app-name> 
+            <app-name></app-name>
         </div>
         <div
             :style="{
@@ -31,16 +31,26 @@
             ></select-component>
         </div>
         <div class="input-box">
-            <input-field name="age" label="wiek"></input-field>
+            <input-field
+                name="age"
+                label="wiek"
+                type="number"
+                v-model="age"
+                @change="updateAge"
+            ></input-field>
             <input-field
                 name="weight"
                 label="waga (kg)"
                 type="number"
+                v-model="weight"
+                @change="updateWeight"
             ></input-field>
             <input-field
                 name="height"
                 label="wzrost (cm)"
                 type="number"
+                v-model="height"
+                @change="updateHeight"
             ></input-field>
         </div>
         <div class="select-box">
@@ -78,6 +88,11 @@
             Twoje zapotrzebowanie kaloryczne:
         </div>
 
+        <div>wiek: {{ age }}</div>
+        <div>waga: {{ weight }}</div>
+        <div>wzrost: {{ height }}</div>
+        <div>plec:</div>
+
         <div
             :style="{
                 alignItems: 'center',
@@ -85,7 +100,7 @@
                 fontSize: '32px',
             }"
         >
-            1500 kcl
+            podstawowa przemiana materii: {{ caloricDemand }}
         </div>
     </div>
 </template>
@@ -95,6 +110,7 @@ import AppNameText from "../textComponents/AppNameText.vue";
 import SelectComponent from "../inputComponents/SelectComponent.vue";
 import InputField from "../inputComponents/InputField.vue";
 import SubmitButton from "../buttons/SubmitButton.vue";
+import { ref } from "vue";
 
 export default {
     components: {
@@ -103,8 +119,35 @@ export default {
         "input-field": InputField,
         "submit-button": SubmitButton,
     },
+    methods: {
+        calculate() {
+            //dodac if na plec
+            //podstawowa przemiana materii dla kobiet:
+            this.caloricDemand =
+                655.1 +
+                9.563 * this.weight +
+                1.85 * height.value -
+                4.676 * this.age;
+            //dla męczyzn:
+            //this.caloricDemand = 66.473 + (13.752 * this.weight) + (5.003 * height) - (6.775 * this.age)
+            //dodac obliczenie zapotrzebowania zalezne od aktywnosci
+        },
+        updateAge(event) {
+            this.age = Number(event.target.value);
+        },
+        updateWeight(event) {
+            this.weight = Number(event.target.value);
+        },
+        updateHeight(event) {
+            this.height = Number(event.target.value);
+        },
+    },
     data() {
         return {
+            caloricDemand: 0,
+            age: ref(""),
+            weight: ref(""),
+            height: ref(""),
             sexOptions: [
                 { label: "mężczyzna", value: "male" },
                 { label: "kobieta", value: "female" },

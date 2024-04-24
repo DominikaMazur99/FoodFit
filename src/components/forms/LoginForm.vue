@@ -11,7 +11,6 @@
             v-model="username"
             @change="updateUsername"
         ></input-field>
-        <p>Wartość pola nazwa użytkownika: {{ username }}</p>
         <input-field
             name="password"
             label="Hasło"
@@ -25,6 +24,7 @@
                 >Nie posiadasz jeszcze konta? Zarejestruj się!</router-link
             >
         </p>
+        <p>Wartość pola nazwa użytkownika: {{ username }}</p>
     </div>
 </template>
 
@@ -32,7 +32,7 @@
 import InputField from "../inputComponents/InputField.vue";
 import SubmitButton from "../buttons/SubmitButton.vue";
 import AppNameText from "../textComponents/AppNameText.vue";
-
+import { ref } from "vue";
 export default {
     components: {
         "input-field": InputField,
@@ -41,14 +41,14 @@ export default {
     },
     data() {
         return {
-            username: "",
+            username: ref(""),
         };
     },
     methods: {
         //tu musi być update tego pola, które definiuje w komponencie
         // to pole jest tutaj bo tu chcemy miec dane ktore wyslemy do zapisu
-        updateUsername(value) {
-            this.username = value;
+        updateUsername(event) {
+            this.username = event.target.value;
         },
     },
 };

@@ -7,31 +7,17 @@
                 :id="name"
                 :type="type"
                 :placeholder="placeholder"
-                :value="modelValue"
-                @input="updateInputValue($event.target.value)"
+                v-model="modelValue"
             />
         </div>
     </div>
 </template>
 
 <script setup>
-import { defineProps, defineEmits } from "vue";
+import { defineProps } from "vue";
 
 //jezeli zmienilibysmy nazwe z modelValue to przestanie działać
-const props = defineProps([
-    "modelValue",
-    "name",
-    "label",
-    "type",
-    "placeholder",
-]);
-
-//tu emitujemy zmianę pola, aby móc miec dostęp do wartości w miejscu hgdzie uzywamy komponentu
-const emit = defineEmits(["update:modelValue"]);
-
-const updateInputValue = (value) => {
-    emit("update:modelValue", value);
-};
+const props = defineProps(["value", "name", "label", "type", "placeholder"]);
 </script>
 
 <style scoped>

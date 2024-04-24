@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from "vue-router";
 
 export default createRouter({
     history: createWebHistory(),
@@ -22,6 +22,11 @@ export default createRouter({
             path: "/zapotrzebowanie_kaloryczne",
             name: "CaloricDemandView",
             component: () => import("./views/CaloricDemandView.vue"),
+        },
+        {
+            path: "/dziennik",
+            name: "JournalView",
+            component: () => import("./views/JournalView.vue"),
         },
     ],
 });
