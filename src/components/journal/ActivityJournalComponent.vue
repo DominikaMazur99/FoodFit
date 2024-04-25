@@ -53,8 +53,10 @@ export default {
 
 /* te klasy to są klasy z komponentów z vuetify, potrzebowalam dostosowac je do naszego projektu */
 .v-tab.v-tab.v-btn {
-    min-width: 70px;
-    border-radius: 100px;
+    min-width: 3em;
+    width: 1.5em;
+    height: 3em;
+    border-radius: 3em;
     border: 1px solid #2f7d28;
     margin-right: 1px;
 }
