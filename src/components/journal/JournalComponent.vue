@@ -39,4 +39,5 @@ export default {
 .v-window {
     max-width: 700px;
 }
+
 </style>
