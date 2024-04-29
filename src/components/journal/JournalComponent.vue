@@ -6,7 +6,7 @@
             <v-tab :value="activity">Aktywności</v-tab>
         </v-tabs>
         <v-window v-model="tab">
-            <v-window-item :value="melas"
+            <v-window-item :value="meals"
                 ><meals-journal></meals-journal
             ></v-window-item>
             <v-window-item :value="activity">
