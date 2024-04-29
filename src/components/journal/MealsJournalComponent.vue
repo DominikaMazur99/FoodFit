@@ -38,11 +38,11 @@ export default {
       selectedDay: null,
       tab: new Date().getDay() === 0 ? 6 : new Date().getDay() - 1,
       data: {
-        breakfast: {name: "sniad"},
-        second_breakfast: {name: "sec"},
-        dinner: {name: "obiad"},
-        dessert: {name: "deser"},
-        supper: {name: "kolacja"}
+        breakfast: {name: "sniad", calories: 120},
+        second_breakfast: {name: "sec", calories: 240},
+        dinner: {name: "obiad", calories: 350},
+        dessert: {name: "deser", calories: 110},
+        supper: {name: "kolacja", calories: 200}
       },
     };
   },
