@@ -211,10 +211,11 @@ export default {
             checkAndUpdate(
                 "http://localhost:3010/api/calculator",
                 {
-                    user_id: 190,
+                    user_id: 190, // to powinna byc tak samo wartosc dla uzytkownika
                     caloric_demand: this.caloricDemand,
                 },
                 100
+                // tu trzeba będzie podmienic liczbę na wartość pobrana dla zalogowanego uzytkownika
             );
         },
         calculateActivityFactor() {
