@@ -194,10 +194,14 @@ export default {
                 this.caloricDemand = Math.round(totalMetabolism);
             }
             console.log("zapotrzebowanie kaloryczne: ", this.caloricDemand);
-            fetch("http://localhost:8080/calculator/caloricDemand", {
+
+            fetch("http://localhost:3010/api/calculator", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ caloricDemand: this.caloricDemand }),
+                body: JSON.stringify({
+                    user_id: 1,
+                    caloric_demand: this.caloricDemand,
+                }),
             }); //GET bez method
         },
         calculateActivityFactor() {

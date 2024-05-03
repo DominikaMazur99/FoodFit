@@ -8,6 +8,7 @@ const port = 3010;
 
 // Import Meals model and routes
 const mealsRoutes = require("./routes/mealsRoutes"); // Adjust the path as needed
+const calculatorRoutes = require("./routes/calculatorRoutes");
 
 // Middleware
 app.use(cors());
@@ -15,6 +16,7 @@ app.use(bodyParser.json());
 
 // Mount routes
 app.use("/api/meals", mealsRoutes);
+app.use("/api/calculator", calculatorRoutes);
 
 // Database connection
 const CONNECTION_STRING =
