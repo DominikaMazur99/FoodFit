@@ -109,16 +109,6 @@
             {{ caloricDemand }} kcal
         </div>
 
-        <!--
-            <div>
-            <error-box
-                :errors=this.errors
-                errorMessageVisible="errorMessageVisible"
-                >
-            </error-box>
-        </div>
-        -->
-
         <error-modal
             :errorMessageVisible="errorMessageVisible"
             :hideErrorMessage="hideErrorMessage"
