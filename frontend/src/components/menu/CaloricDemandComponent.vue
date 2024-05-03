@@ -27,7 +27,7 @@
             <select-component
                 name="sex"
                 placeholder="płeć"
-                :options="this.sexOptions"
+                :options="this.sexOptions || []"
                 v-model="sex"
                 @change="updateSex"
             ></select-component>
@@ -60,7 +60,7 @@
                 name="work_activity_level"
                 placeholder="poziom aktywności w pracy"
                 minWidth="300px"
-                :options="this.workActivityLevelOptions"
+                :options="this.workActivityLevelOptions || []"
                 v-model="workActivityLevel"
                 @change="updateWorkActivityLevel"
             ></select-component>
@@ -68,7 +68,7 @@
                 name="freetime_activity_level"
                 placeholder="poziom aktywności w wolnym czasie"
                 minWidth="300px"
-                :options="this.freeTimeActivityLevelOptions"
+                :options="this.freeTimeActivityLevelOptions || []"
                 v-model="freetimeActivityLevel"
                 @change="updateFreetimeActivityLevel"
             ></select-component>
@@ -76,7 +76,7 @@
                 name="diet_goal"
                 placeholder="cel diety"
                 minWidth="300px"
-                :options="this.dietGoalOptions"
+                :options="this.dietGoalOptions || []"
                 v-model="dietGoal"
                 @change="updateDietGoal"
             ></select-component>
@@ -142,6 +142,12 @@
 </template>
 <script>
 import fetchData from "../../../helpers/api";
+import {
+    sexOptions,
+    workActivityLevelOptions,
+    freeTimeActivityLevelOptions,
+    dietGoalOptions,
+} from "../../../helpers/selectOptions.js";
 
 import AppNameText from "../textComponents/AppNameText.vue";
 import SelectComponent from "../inputComponents/SelectComponent.vue";
@@ -282,25 +288,33 @@ export default {
             return correct;
         },
         updateAge(event) {
-            this.age = Number(event.target.value);
+            const inputValue = event?.target?.value || "";
+            this.age = Number(inputValue);
         },
         updateWeight(event) {
-            this.weight = Number(event.target.value);
+            const inputValue = event?.target?.value || "";
+            this.weight = Number(inputValue);
         },
         updateHeight(event) {
-            this.height = Number(event.target.value);
+            const inputValue = event?.target?.value || "";
+            this.height = Number(inputValue);
         },
         updateSex(event) {
-            this.sex = event.target.value;
+            const selectedValue = event?.target?.value || "";
+            this.sex = selectedValue;
         },
+
         updateWorkActivityLevel(event) {
-            this.workActivityLevel = event.target.value;
+            const selectedValue = event?.target?.value || "";
+            this.workActivityLevel = selectedValue;
         },
         updateFreetimeActivityLevel(event) {
-            this.freetimeActivityLevel = event.target.value;
+            const selectedValue = event?.target?.value || "";
+            this.freetimeActivityLevel = selectedValue;
         },
         updateDietGoal(event) {
-            this.dietGoal = event.target.value;
+            const selectedValue = event?.target?.value || "";
+            this.dietGoal = selectedValue;
         },
         showErrorMessage() {
             this.errorMessageVisible = true;
@@ -330,55 +344,10 @@ export default {
                 freetimeActivityLevel: "",
                 dietGoal: "",
             },
-            sexOptions: [
-                { label: "mężczyzna", value: "male" },
-                { label: "kobieta", value: "female" },
-            ],
-            workActivityLevelOptions: [
-                {
-                    label: "bardzo lekka - np. praca przed komputerem, kierowca",
-                    value: "sedentary",
-                },
-                {
-                    label: "lekka - np. lekka praca przemysłowa, sprzedaż",
-                    value: "lowActive",
-                },
-                {
-                    label: "umiarkowana - np. sprzątanie, praca w kuchni",
-                    value: "active",
-                },
-                {
-                    label: "ciężka - np. przemysł, prace budowlane lub rolnictwo",
-                    value: "veryActive",
-                },
-            ],
-            freeTimeActivityLevelOptions: [
-                {
-                    label: "bardzo lekka - brak aktywności w wolnym czasie",
-                    value: "sedentary",
-                },
-                {
-                    label: "lekka - np. raz w tygodniu spaceruje, pracuję w ogródku",
-                    value: "lowActive",
-                },
-                {
-                    label: "umiarkowana - reguralnie ćwiczę min. raz w tygodniu ",
-                    value: "active",
-                },
-                {
-                    label: "duża - reguralnie ćwiczę więcej niż raz w tygodniu",
-                    value: "veryActive",
-                },
-                {
-                    label: "intensywna - ciężka aktywności fizyczna kilka razy w tygodniu",
-                    value: "extremelyActive",
-                },
-            ],
-            dietGoalOptions: [
-                { label: "chcę schudnąć", value: "deficit" },
-                { label: "chcę utrzymać wagę", value: "maintenance" },
-                { label: "chcę przytyć", value: "surplus" },
-            ],
+            sexOptions: sexOptions,
+            workActivityLevelOptions: workActivityLevelOptions,
+            freeTimeActivityLevelOptions: freeTimeActivityLevelOptions,
+            dietGoalOptions: dietGoalOptions,
         };
     },
 };

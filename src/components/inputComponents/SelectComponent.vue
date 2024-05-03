@@ -55,7 +55,7 @@ export default {
     },
     data() {
         return {
-            selectedValue: this.value || this.placeholder,
+            selectedValue: this.value || this.placeholder || "",
         };
     },
     computed: {
