@@ -141,6 +141,8 @@
     </div>
 </template>
 <script>
+import fetchData from "../../../helpers/api";
+
 import AppNameText from "../textComponents/AppNameText.vue";
 import SelectComponent from "../inputComponents/SelectComponent.vue";
 import InputField from "../inputComponents/InputField.vue";
@@ -195,14 +197,10 @@ export default {
             }
             console.log("zapotrzebowanie kaloryczne: ", this.caloricDemand);
 
-            fetch("http://localhost:3010/api/calculator", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    user_id: 1,
-                    caloric_demand: this.caloricDemand,
-                }),
-            }); //GET bez method
+            fetchData("http://localhost:3010/api/calculator", "POST", {
+                user_id: 1,
+                caloric_demand: this.caloricDemand,
+            });
         },
         calculateActivityFactor() {
             //tablica dwuwymiarowa ze współczynnikami aktywnosci fizycznej
