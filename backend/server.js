@@ -7,34 +7,32 @@ const app = express();
 const port = 3010;
 
 // Import Meals model and routes
-
 const mealsRoutes = require("./routes/mealsRoutes"); // Adjust the path as needed
 
-app.use(
-    cors({
-        origin: "http://localhost:5173",
-        methods: ["GET", "POST", "PUT", "DELETE"],
-        credentials: true,
-    })
-);
+// Middleware
+app.use(cors());
+app.use(bodyParser.json());
 
+// Mount routes
+app.use("/api/meals", mealsRoutes);
+
+// Database connection
 const CONNECTION_STRING =
     "mongodb+srv://admin:admin123@cluster0.lyyxbjg.mongodb.net/";
-
-mongoose.connect(CONNECTION_STRING, {
+const DATABASENAME = "parameters";
+mongoose.connect(CONNECTION_STRING + DATABASENAME, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 });
-
-// Use bodyParser middleware
-app.use(bodyParser.json());
-
-// Use mealsRoutes for /api/meals endpoints
-app.use("/api/meals", mealsRoutes);
+const db = mongoose.connection;
+db.once("open", () => {
+    console.log(`Database connected: ${CONNECTION_STRING}`);
+});
+db.on("error", (err) => {
+    console.error(`Connection error: ${err}`);
+});
 
 // Start the server
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
-
-module.exports = app;

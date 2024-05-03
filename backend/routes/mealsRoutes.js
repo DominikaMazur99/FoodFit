@@ -3,7 +3,7 @@ const router = express.Router();
 const Meals = require("../models/Meals");
 
 // GET /api/products
-router.get("/api/meals", async (req, res) => {
+router.get("/", async (req, res) => {
     try {
         const meals = await Meals.find();
         res.json(meals);
@@ -16,25 +16,19 @@ router.get("/api/meals", async (req, res) => {
 });
 
 // POST /api/products
-router.post("/api/meals", async (req, res) => {
+router.post("/", async (req, res) => {
+    const newMeals = new Meals(req.body);
     try {
-        const newMeals = new Meals({
-            date: req.body.date,
-            calories: req.body.calories,
-        });
-
-        await newMeals.save();
-        res.json(newMeals);
+        const meals = await newMeals.save();
+        if (!meals) throw new Error("Something went wrong saving the Todo");
+        res.status(200).json(meals);
     } catch (error) {
-        console.error("Error adding product:", error);
-        res.status(500).json({
-            error: "An error occurred while adding the product",
-        });
+        res.status(500).json({ message: error.message });
     }
 });
 
 // DELETE /api/products/:id
-router.delete("/api/meals/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
     try {
         await Meals.findByIdAndDelete(req.params.id);
         res.json({ message: "Product deleted successfully" });
@@ -49,7 +43,7 @@ router.delete("/api/meals/:id", async (req, res) => {
 // Update a product
 
 // PUT /api/products/:idr
-router.put("/api/meals/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
     try {
         const mealId = req.params.id;
         const updatedMealsData = {

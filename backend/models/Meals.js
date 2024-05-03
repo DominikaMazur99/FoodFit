@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+const { Schema, model } = require("mongoose");
 
-const mealsSchema = new mongoose.Schema({
+const mealsSchema = new Schema({
     calories: {
         type: String,
         required: true,
@@ -11,6 +11,6 @@ const mealsSchema = new mongoose.Schema({
     },
 });
 
-//const Product = mongoose.model('Product', productSchema);
+const Meals = model("meals", mealsSchema);
 
-module.exports = mongoose.models.Meals || mongoose.model("Meals", mealsSchema);
+module.exports = Meals;
