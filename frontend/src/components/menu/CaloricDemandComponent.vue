@@ -141,7 +141,7 @@
     </div>
 </template>
 <script>
-import fetchData from "../../../helpers/api";
+import { checkAndUpdate } from "../../../helpers/api";
 import {
     sexOptions,
     workActivityLevelOptions,
@@ -203,10 +203,19 @@ export default {
             }
             console.log("zapotrzebowanie kaloryczne: ", this.caloricDemand);
 
-            fetchData("http://localhost:3010/api/calculator", "POST", {
-                user_id: 1,
-                caloric_demand: this.caloricDemand,
-            });
+            // fetchData("http://localhost:3010/api/calculator", "POST", {
+            //     user_id: 1,
+            //     caloric_demand: this.caloricDemand,
+            // });
+
+            checkAndUpdate(
+                "http://localhost:3010/api/calculator",
+                {
+                    user_id: 190,
+                    caloric_demand: this.caloricDemand,
+                },
+                100
+            );
         },
         calculateActivityFactor() {
             //tablica dwuwymiarowa ze współczynnikami aktywnosci fizycznej
