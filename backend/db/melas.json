@@ -1,0 +1,302 @@
+[
+    {
+        "value": "Eggs",
+        "calories_on_hundred_gram": "155",
+        "label": "jajka"
+    },
+    {
+        "value": "Milk",
+        "calories_on_hundred_gram": "42",
+        "label": "mleko"
+    },
+    {
+        "value": "Bread",
+        "calories_on_hundred_gram": "250",
+        "label": "chleb"
+    },
+    {
+        "value": "Apple",
+        "calories_on_hundred_gram": "52",
+        "label": "jabłko"
+    },
+    {
+        "value": "Banana",
+        "calories_on_hundred_gram": "89",
+        "label": "banan"
+    },
+    {
+        "value": "Orange",
+        "calories_on_hundred_gram": "47",
+        "label": "pomarańcza"
+    },
+    {
+        "value": "Chicken Breast",
+        "calories_on_hundred_gram": "165",
+        "label": "piers z kurczaka"
+    },
+    {
+        "value": "Rice",
+        "calories_on_hundred_gram": "130",
+        "label": "ryż"
+    },
+    {
+        "value": "Pasta",
+        "calories_on_hundred_gram": "131",
+        "label": "makaron"
+    },
+    {
+        "value": "Potato",
+        "calories_on_hundred_gram": "77",
+        "label": "ziemniak"
+    },
+    {
+        "value": "Tomato",
+        "calories_on_hundred_gram": "18",
+        "label": "pomidor"
+    },
+    {
+        "value": "Cucumber",
+        "calories_on_hundred_gram": "15",
+        "label": "ogórek"
+    },
+    {
+        "value": "Carrot",
+        "calories_on_hundred_gram": "41",
+        "label": "marchewka"
+    },
+    {
+        "value": "Lettuce",
+        "calories_on_hundred_gram": "15",
+        "label": "sałata"
+    },
+    {
+        "value": "Cheese",
+        "calories_on_hundred_gram": "402",
+        "label": "ser"
+    },
+    {
+        "value": "Beef",
+        "calories_on_hundred_gram": "250",
+        "label": "wołowina"
+    },
+    {
+        "value": "Salmon",
+        "calories_on_hundred_gram": "208",
+        "label": "łosoś"
+    },
+    {
+        "value": "Tuna",
+        "calories_on_hundred_gram": "184",
+        "label": "tuńczyk"
+    },
+    {
+        "value": "Broccoli",
+        "calories_on_hundred_gram": "34",
+        "label": "brokuł"
+    },
+    {
+        "value": "Spinach",
+        "calories_on_hundred_gram": "23",
+        "label": "szpinak"
+    },
+    {
+        "value": "Onion",
+        "calories_on_hundred_gram": "40",
+        "label": "cebula"
+    },
+    {
+        "value": "Garlic",
+        "calories_on_hundred_gram": "149",
+        "label": "czosnek"
+    },
+    {
+        "value": "Mushroom",
+        "calories_on_hundred_gram": "22",
+        "label": "grzyb"
+    },
+    {
+        "value": "Olive Oil",
+        "calories_on_hundred_gram": "884",
+        "label": "oliwa z oliwek"
+    },
+    {
+        "value": "Butter",
+        "calories_on_hundred_gram": "717",
+        "label": "masło"
+    },
+    {
+        "value": "Yogurt",
+        "calories_on_hundred_gram": "59",
+        "label": "jogurt"
+    },
+    {
+        "value": "Honey",
+        "calories_on_hundred_gram": "304",
+        "label": "miód"
+    },
+    {
+        "value": "Peanut Butter",
+        "calories_on_hundred_gram": "589",
+        "label": "masło orzechowe"
+    },
+    {
+        "value": "Almonds",
+        "calories_on_hundred_gram": "579",
+        "label": "migdały"
+    },
+    {
+        "value": "Walnuts",
+        "calories_on_hundred_gram": "654",
+        "label": "orzechy włoskie"
+    },
+    {
+        "value": "Cashews",
+        "calories_on_hundred_gram": "553",
+        "label": "orzechy nerkowca"
+    },
+    {
+        "value": "Pistachios",
+        "calories_on_hundred_gram": "562",
+        "label": "orzechy pistacjowe"
+    },
+    {
+        "value": "Dark Chocolate",
+        "calories_on_hundred_gram": "546",
+        "label": "czekolada gorzka"
+    },
+    {
+        "value": "Milk Chocolate",
+        "calories_on_hundred_gram": "535",
+        "label": "czekolada mleczna"
+    },
+    {
+        "value": "White Chocolate",
+        "calories_on_hundred_gram": "536",
+        "label": "czekolada biała"
+    },
+    {
+        "value": "Coffee",
+        "calories_on_hundred_gram": "2",
+        "label": "kawa"
+    },
+    {
+        "value": "Green Tea",
+        "calories_on_hundred_gram": "1",
+        "label": "zielona herbata"
+    },
+    {
+        "value": "Black Tea",
+        "calories_on_hundred_gram": "1",
+        "label": "czarna herbata"
+    },
+    {
+        "value": "Red Wine",
+        "calories_on_hundred_gram": "85",
+        "label": "czerwone wino"
+    },
+    {
+        "value": "White Wine",
+        "calories_on_hundred_gram": "82",
+        "label": "białe wino"
+    },
+    {
+        "value": "Beer",
+        "calories_on_hundred_gram": "43",
+        "label": "piwo"
+    },
+    {
+        "value": "Sparkling Water",
+        "calories_on_hundred_gram": "0",
+        "label": "woda gazowana"
+    },
+    {
+        "value": "Still Water",
+        "calories_on_hundred_gram": "0",
+        "label": "woda niegazowana"
+    },
+    {
+        "value": "Coca-Cola",
+        "calories_on_hundred_gram": "42",
+        "label": "coca-cola"
+    },
+    {
+        "value": "Sprite",
+        "calories_on_hundred_gram": "42",
+        "label": "sprite"
+    },
+    {
+        "value": "Orange Juice",
+        "calories_on_hundred_gram": "45",
+        "label": "sok pomarańczowy"
+    },
+    {
+        "value": "Apple Juice",
+        "calories_on_hundred_gram": "46",
+        "label": "sok jabłkowy"
+    },
+    {
+        "value": "Lemonade",
+        "calories_on_hundred_gram": "45",
+        "label": "lemoniada"
+    },
+    {
+        "value": "Tomato Juice",
+        "calories_on_hundred_gram": "17",
+        "label": "sok pomidorowy"
+    },
+    {
+        "value": "Watermelon",
+        "calories_on_hundred_gram": "30",
+        "label": "arbuz"
+    },
+    {
+        "value": "Grapes",
+        "calories_on_hundred_gram": "69",
+        "label": "winogrona"
+    },
+    {
+        "value": "Strawberries",
+        "calories_on_hundred_gram": "32",
+        "label": "truskawki"
+    },
+    {
+        "value": "Blueberries",
+        "calories_on_hundred_gram": "57",
+        "label": "borówki"
+    },
+    {
+        "value": "Pineapple",
+        "calories_on_hundred_gram": "50",
+        "label": "ananas"
+    },
+    {
+        "value": "Peach",
+        "calories_on_hundred_gram": "39",
+        "label": "brzoskwinia"
+    },
+    {
+        "value": "Pear",
+        "calories_on_hundred_gram": "57",
+        "label": "gruszka"
+    },
+    {
+        "value": "Cherry",
+        "calories_on_hundred_gram": "50",
+        "label": "wiśnia"
+    },
+    {
+        "value": "Raspberry",
+        "calories_on_hundred_gram": "52",
+        "label": "malina"
+    },
+    {
+        "value": "Blackberry",
+        "calories_on_hundred_gram": "43",
+        "label": "jeżyna"
+    },
+    {
+        "value": "Apricot",
+        "calories_on_hundred_gram": "48",
+        "label": "morela"
+    }
+]

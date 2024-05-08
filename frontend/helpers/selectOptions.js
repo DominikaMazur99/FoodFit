@@ -50,3 +50,9 @@ export const dietGoalOptions = [
     { label: "chcę utrzymać wagę", value: "maintenance" },
     { label: "chcę przytyć", value: "surplus" },
 ];
+
+export const indgredientsOptions = [
+    { label: "jajka", value: "eggs" },
+    { label: "mleko", value: "milk" },
+    { label: "ser żółty", value: "cheese" },
+];

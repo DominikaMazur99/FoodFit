@@ -1,10 +1,15 @@
 export const fetchData = async (url, method = "GET", data = {}) => {
     try {
-        const response = await fetch(url, {
+        const options = {
             method: method,
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data),
-        });
+        };
+
+        if (method !== "GET") {
+            options.body = JSON.stringify(data);
+        }
+
+        const response = await fetch(url, options);
 
         if (!response.ok) {
             throw new Error(`Error ${response.status}: ${response.statusText}`);

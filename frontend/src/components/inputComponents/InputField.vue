@@ -50,5 +50,11 @@ const props = defineProps(["value", "name", "label", "type", "placeholder"]);
     min-height: auto;
     width: 100%; /* Take up full width available in the parent container */
     border-radius: 10px;
+    color: #2f7d28;
+    font-weight: light;
+}
+.input-field input::placeholder {
+    color: #2f7d28;
+    opacity: 0.5; /* Możesz dostosować przezroczystość według potrzeb */
 }
 </style>

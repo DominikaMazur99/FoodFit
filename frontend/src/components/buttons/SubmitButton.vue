@@ -41,6 +41,9 @@ export default {
 
 <style scoped>
 .submit-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: auto;
     width: auto;
     border-radius: 30px;

@@ -78,6 +78,7 @@ export default {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    flex: 1; /* Allow input fields to grow and shrink as needed */
 }
 
 .box {
@@ -88,13 +89,15 @@ export default {
     display: block;
     margin-bottom: 0.5rem;
     color: #2f7d28;
-    font-weight: lighter;
+    font-weight: 300;
     text-align: left;
 }
 
 /* Styl dla koloru placeholdera */
 .select-field select::placeholder {
-    color: green; /* Zmiana koloru placeholdera na zielony */
+    color: #2f7d28;
+    font-weight: light;
+    opacity: 0.5; /* Możesz dostosować przezroczystość według potrzeb */
 }
 
 .select-field select {
@@ -102,9 +105,10 @@ export default {
     font-size: 1rem;
     border: 1px solid #ccc;
     box-sizing: border-box;
-    height: auto;
+    min-height: auto;
+    width: 100%; /* Take up full width available in the parent container */
     border-radius: 10px;
     color: #2f7d28;
-    font-weight: lighter;
+    font-weight: light;
 }
 </style>
