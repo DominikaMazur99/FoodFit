@@ -34,14 +34,14 @@
         </v-list-group>
     </v-list>
     <reusable-modal :dialog="dialog">
-        <select-component
+        <reusable-select
             name="products"
             label="produkty"
             minWidth="180px"
             :options="this.indgredientsOptions || []"
             v-model="ingredientSelected"
             @change="updateIndgredientsOptions"
-        ></select-component>
+        ></reusable-select>
         <input-field
             name="weight"
             label="waga(g)"
@@ -49,7 +49,10 @@
             v-model="weight"
             @change="updateWeight"
         ></input-field>
-        <submit-button name="Dodaj"></submit-button>
+        <submit-button
+            name="Dodaj"
+            @click="addIngredientToMealsList"
+        ></submit-button>
     </reusable-modal>
 </template>
 
@@ -57,7 +60,7 @@
 import SvgIcon from "@jamescoyle/vue-icon";
 import ReusableModal from "../../modals/ReusableModal.vue";
 import InputField from "../../inputComponents/InputField.vue";
-import SelectComponent from "../../inputComponents/SelectComponent.vue";
+import ReusableSelect from "../../inputComponents/ReusableSelect.vue";
 import SubmitButton from "../../buttons/SubmitButton.vue";
 
 import { mdiPlus } from "@mdi/js";
@@ -74,7 +77,7 @@ export default {
     components: {
         SvgIcon,
         "reusable-modal": ReusableModal,
-        "select-component": SelectComponent,
+        "reusable-select": ReusableSelect,
         "input-field": InputField,
         "submit-button": SubmitButton,
     },
@@ -102,12 +105,24 @@ export default {
             this.dialog = true;
         },
         updateIndgredientsOptions(event) {
-            const selectedValue = event.target.value;
+            const selectedValue = JSON.parse(event.target.value);
             this.ingredientSelected = selectedValue;
         },
         updateWeight(event) {
             const inputValue = event.target.value;
             this.weight = inputValue;
+        },
+        addIngredientToMealsList() {
+            const calories =
+                (Number(this.weight) *
+                    Number(this.ingredientSelected.calories_on_hundred_gram)) /
+                100;
+            const meal = {
+                name: this.ingredientSelected.label,
+                calories: calories,
+                gram: this.weight,
+            };
+            console.log(meal);
         },
     },
     async mounted() {
