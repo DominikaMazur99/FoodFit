@@ -95,21 +95,19 @@ export default {
         hideErrorMessage() {
             this.errorMessageVisible = false;
         },
-        login() {
-            if (this.validate()) {
-                this.getUser();
-                this.$router.push("/menu");
-            } else {
-                console.log("Walidacja nie powiodła się.");
+        async login() {
+            try {
+                const response = await fetchData(
+                    `http://localhost:3010/api/users?userName=${this.username}`
+                );
+                if (response) {
+                    const user = response;
+                    localStorage.setItem("login", user.userName);
+                    this.$router.push("/menu");
+                }
+            } catch (err) {
+                console.log(err);
             }
-        },
-        async getUser() {
-            console.log("hej");
-            const response = await fetchData(
-                `http://localhost:3010/api/users?userName=${this.username}`
-            );
-            const user = response;
-            console.log("Zalogowany użytkownik:", user);
         },
     },
 };

@@ -53,6 +53,14 @@
             name="Dodaj"
             @click="addIngredientToMealsList"
         ></submit-button>
+        <v-list lines="one">
+            <v-list-item
+                v-for="product in productList"
+                :key="product.name"
+                :title="product.name"
+                :subtitle="`${product.calories}kcl, ${product.gram}g`"
+            ></v-list-item>
+        </v-list>
     </reusable-modal>
 </template>
 
@@ -62,6 +70,8 @@ import ReusableModal from "../../modals/ReusableModal.vue";
 import InputField from "../../inputComponents/InputField.vue";
 import ReusableSelect from "../../inputComponents/ReusableSelect.vue";
 import SubmitButton from "../../buttons/SubmitButton.vue";
+
+import { getTodayDate } from "../../../../helpers/helpersFunctions";
 
 import { mdiPlus } from "@mdi/js";
 import { ref } from "vue";
@@ -96,6 +106,8 @@ export default {
             ingredientSelected: ref(""),
             weight: ref(""),
             mealType: "",
+            user: "",
+            productList: [],
         };
     },
     methods: {
@@ -118,15 +130,20 @@ export default {
                     Number(this.ingredientSelected.calories_on_hundred_gram)) /
                 100;
             const meal = {
+                user: this.user,
                 name: this.ingredientSelected.label,
                 calories: calories,
                 gram: this.weight,
+                date: getTodayDate(),
             };
             console.log(meal);
+            this.productList.push(meal);
         },
     },
     async mounted() {
         try {
+            const userLogin = localStorage.getItem("login");
+            this.user = userLogin;
             const response = await fetchData(
                 "http://localhost:3010/api/ingredients",
                 "GET",
