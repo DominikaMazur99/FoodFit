@@ -97,13 +97,15 @@ export default {
         },
         async login() {
             try {
-                const response = await fetchData(
-                    `http://localhost:3010/api/users?userName=${this.username}`
-                );
-                if (response) {
-                    const user = response;
-                    localStorage.setItem("login", user.userName);
-                    this.$router.push("/menu");
+                if (this.validate()) {
+                    const response = await fetchData(
+                        `http://localhost:3010/api/users?userName=${this.username}`
+                    );
+                    if (response) {
+                        const user = response;
+                        localStorage.setItem("login", user.userName);
+                        this.$router.push("/menu");
+                    }
                 }
             } catch (err) {
                 console.log(err);
