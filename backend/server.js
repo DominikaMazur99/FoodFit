@@ -10,6 +10,7 @@ const port = 3010;
 const mealsRoutes = require("./routes/mealsRoutes"); // Adjust the path as needed
 const calculatorRoutes = require("./routes/calculatorRoutes");
 const ingredientsRoutes = require("./routes/ingredientRoutes");
+const userRoutes = require("./routes/userRoutes");
 
 // Middleware
 app.use(cors());
@@ -19,6 +20,7 @@ app.use(bodyParser.json());
 app.use("/api/meals", mealsRoutes);
 app.use("/api/calculator", calculatorRoutes);
 app.use("/api/ingredients", ingredientsRoutes);
+app.use("/api/users", userRoutes);
 
 // Database connection
 const CONNECTION_STRING =
