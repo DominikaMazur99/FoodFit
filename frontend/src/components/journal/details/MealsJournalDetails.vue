@@ -54,9 +54,10 @@
             @click="addIngredientToMealsList"
         ></submit-button>
         <v-list lines="one">
+            <p>Dodane produkty:</p>
             <v-list-item
                 v-for="product in productList"
-                :key="product.name"
+                :key="`${product.name}/${product.calories}`"
                 :title="product.name"
                 :subtitle="`${product.calories}kcl, ${product.gram}g`"
             ></v-list-item>
@@ -136,7 +137,7 @@ export default {
                 gram: this.weight,
                 date: getTodayDate(),
             };
-            console.log(meal);
+            console.log(meal, this.mealType);
             this.productList.push(meal);
         },
     },
