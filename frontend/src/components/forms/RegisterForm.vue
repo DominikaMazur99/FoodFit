@@ -32,9 +32,7 @@
             @change="updateEmail"
         ></input-field>
 
-        <router-link to="/">
-            <button-login name="Zarejestruj" :onClick="register"></button-login>
-        </router-link>
+        <button-login name="Zarejestruj" @click="register"></button-login>
         <p class="message-text">
             <router-link to="/">Posiadasz już konto? Zaloguj się!</router-link>
         </p>
@@ -45,8 +43,7 @@
 import InputField from "../inputComponents/InputField.vue";
 import SubmitButton from "../buttons/SubmitButton.vue";
 import AppNameText from "../textComponents/AppNameText.vue";
-import { checkAndUpdate } from "../../../helpers/api";
-import { fetchData } from "../../../helpers/api";
+import { checkAndPost } from "../../../helpers/api";
 import { ref } from "vue";
 
 export default {
@@ -64,12 +61,26 @@ export default {
         };
     },
     methods: {
-        register() {
+        async register() {
             console.log("Registering...");
             console.log(this.username);
             console.log(this.password);
             console.log(this.repeatPassword);
             console.log(this.email);
+
+            try {
+                const response = await checkAndPost(
+                    "http://localhost:3010/api/users",
+                    {
+                        userName: this.username,
+                        password: this.password,
+                    },
+                    this.username
+                );
+                console.log(response);
+            } catch (err) {
+                console.log(err);
+            }
 
             // checkAndUpdate(
             //     "http://localhost:3010/api/users",

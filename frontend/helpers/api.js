@@ -44,3 +44,28 @@ export const checkAndUpdate = async (url, data = {}, userId) => {
         console.error("Error:", error.message);
     }
 };
+
+export const checkAndPost = async (url, data = {}, userLogin) => {
+    try {
+        const response = await fetch(`${url}/`);
+        if (response.ok) {
+            const existingData = await response.json();
+            const existingEntry = existingData.find(
+                (entry) =>
+                    entry.userName.toLowerCase() === userLogin.toLowerCase()
+            );
+            console.log(existingEntry);
+            if (existingEntry) {
+                console.log("użytkownik istnieje w bazie, zaloguj się");
+            } else {
+                // Jeśli nie istnieje wpis, utwórz nowy za pomocą POST
+                await fetchData(url, "POST", data);
+                console.log("użytkownik dodany do bazy");
+            }
+        } else {
+            throw new Error(`Error ${response.status}: ${response.statusText}`);
+        }
+    } catch (error) {
+        console.error("Error:", error.message);
+    }
+};
