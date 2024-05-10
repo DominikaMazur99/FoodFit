@@ -45,7 +45,7 @@ export const checkAndUpdate = async (url, data = {}, userId) => {
     }
 };
 
-export const checkAndPost = async (url, data = {}, userLogin) => {
+export const checkAndPost = async (url, data = {}, userLogin, updateProps) => {
     try {
         const response = await fetch(`${url}/`);
         if (response.ok) {
@@ -54,13 +54,25 @@ export const checkAndPost = async (url, data = {}, userLogin) => {
                 (entry) =>
                     entry.userName.toLowerCase() === userLogin.toLowerCase()
             );
-            console.log(existingEntry);
             if (existingEntry) {
                 console.log("użytkownik istnieje w bazie, zaloguj się");
+                updateProps({
+                    show: true,
+                    color: "error",
+                    icon: "$error",
+                    text: "Wystąpił błąd.",
+                    title: "Taki użytkownik już istnieje, spróbuj się zalogować.",
+                });
             } else {
-                // Jeśli nie istnieje wpis, utwórz nowy za pomocą POST
+                console.log("jestem");
                 await fetchData(url, "POST", data);
-                console.log("użytkownik dodany do bazy");
+                updateProps({
+                    show: true,
+                    color: "success",
+                    icon: "$success",
+                    text: "Udało się.",
+                    title: "Użytkownik został zarejestrowany.",
+                });
             }
         } else {
             throw new Error(`Error ${response.status}: ${response.statusText}`);

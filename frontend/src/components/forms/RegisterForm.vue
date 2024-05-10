@@ -37,12 +37,21 @@
             <router-link to="/">Posiadasz już konto? Zaloguj się!</router-link>
         </p>
     </div>
+    <div v-if="alertProps.show">
+        <reusable-alert
+            :color="alertProps.color"
+            :icon="alertProps.icon"
+            :text="alertProps.text"
+            :title="alertProps.title"
+        ></reusable-alert>
+    </div>
 </template>
 
 <script>
 import InputField from "../inputComponents/InputField.vue";
 import SubmitButton from "../buttons/SubmitButton.vue";
 import AppNameText from "../textComponents/AppNameText.vue";
+import ReusableAlert from "../modals/ReusableAlert.vue";
 import { checkAndPost } from "../../../helpers/api";
 import { ref } from "vue";
 
@@ -51,6 +60,7 @@ export default {
         "input-field": InputField,
         "button-login": SubmitButton,
         "app-name": AppNameText,
+        "reusable-alert": ReusableAlert,
     },
     data() {
         return {
@@ -58,49 +68,44 @@ export default {
             password: ref(""),
             repeatPassword: ref(""),
             email: ref(""),
+            alertProps: {
+                show: false,
+                color: "",
+                icon: "",
+                text: "",
+                title: "",
+            },
         };
     },
     methods: {
+        updatePropsValue(value) {
+            this.alertProps = value;
+        },
         async register() {
-            console.log("Registering...");
-            console.log(this.username);
-            console.log(this.password);
-            console.log(this.repeatPassword);
-            console.log(this.email);
-
             try {
-                const response = await checkAndPost(
+                await checkAndPost(
                     "http://localhost:3010/api/users",
                     {
                         userName: this.username,
                         password: this.password,
                     },
-                    this.username
+                    this.username,
+                    this.updatePropsValue
                 );
-                console.log(response);
             } catch (err) {
                 console.log(err);
+            } finally {
+                setTimeout(() => {
+                    this.alertProps = {
+                        show: false,
+                        color: "",
+                        icon: "",
+                        text: "",
+                        title: "",
+                    };
+                    this.$router.push("/");
+                }, 3000);
             }
-
-            // checkAndUpdate(
-            //     "http://localhost:3010/api/users",
-            //     {
-            //         userName: this.username,
-            //         password: this.password
-            //     },
-            //
-            // );
-
-            // const response = fetchData(`http://localhost:3010/api/users?userName=${this.username}`);
-            // const user = response;
-            // if(response.ok) {
-            //     console.log('użytkownik istnieje w bazie:', user);
-            // } else {
-            //     console.log("hej z catcha") //TODO: obsłużyć error w api.js
-            // console.log('Użytkownik o podanej nazwie nie został znaleziony.');
-            //                 //tu dodać do bazy użytkownika (ednpoint post)
-
-            // }
         },
         updateUsername(event) {
             const selectedValue = event?.target?.value || "";
