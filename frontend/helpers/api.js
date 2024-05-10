@@ -45,7 +45,12 @@ export const checkAndUpdate = async (url, data = {}, userId) => {
     }
 };
 
-export const checkAndPost = async (url, data = {}, userLogin, updateProps) => {
+export const checkAndRegister = async (
+    url,
+    data = {},
+    userLogin,
+    updateProps
+) => {
     try {
         const response = await fetch(`${url}/`);
         if (response.ok) {
@@ -60,8 +65,8 @@ export const checkAndPost = async (url, data = {}, userLogin, updateProps) => {
                     show: true,
                     color: "error",
                     icon: "$error",
-                    text: "Wystąpił błąd.",
-                    title: "Taki użytkownik już istnieje, spróbuj się zalogować.",
+                    title: "Wystąpił błąd.",
+                    text: "Taki użytkownik już istnieje, spróbuj się zalogować.",
                 });
             } else {
                 console.log("jestem");
@@ -70,8 +75,43 @@ export const checkAndPost = async (url, data = {}, userLogin, updateProps) => {
                     show: true,
                     color: "success",
                     icon: "$success",
-                    text: "Udało się.",
-                    title: "Użytkownik został zarejestrowany.",
+                    title: "Udało się.",
+                    text: "Użytkownik został zarejestrowany.",
+                });
+            }
+        } else {
+            throw new Error(`Error ${response.status}: ${response.statusText}`);
+        }
+    } catch (error) {
+        console.error("Error:", error.message);
+    }
+};
+
+export const checkAndLogin = async (
+    url,
+    data = {},
+    userLogin,
+    updateProps,
+    navigateToMenu
+) => {
+    try {
+        const response = await fetch(`${url}/`);
+        if (response.ok) {
+            const existingData = await response.json();
+            const existingEntry = existingData.find(
+                (entry) =>
+                    entry.userName.toLowerCase() === userLogin.toLowerCase()
+            );
+            console.log(existingEntry);
+            if (existingEntry) {
+                navigateToMenu(); // Wywołanie funkcji nawigacji do menu
+            } else {
+                updateProps({
+                    show: true,
+                    color: "error",
+                    icon: "$error",
+                    text: "Wystąpił błąd..",
+                    title: "Dane logowania są niepoprawne.",
                 });
             }
         } else {

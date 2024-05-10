@@ -52,7 +52,7 @@ import InputField from "../inputComponents/InputField.vue";
 import SubmitButton from "../buttons/SubmitButton.vue";
 import AppNameText from "../textComponents/AppNameText.vue";
 import ReusableAlert from "../modals/ReusableAlert.vue";
-import { checkAndPost } from "../../../helpers/api";
+import { checkAndRegister } from "../../../helpers/api";
 import { ref } from "vue";
 
 export default {
@@ -83,7 +83,7 @@ export default {
         },
         async register() {
             try {
-                await checkAndPost(
+                await checkAndRegister(
                     "http://localhost:3010/api/users",
                     {
                         userName: this.username,

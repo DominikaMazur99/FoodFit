@@ -24,13 +24,19 @@
                 >Nie posiadasz jeszcze konta? Zarejestruj się!</router-link
             >
         </p>
-        <p>Wartość pola nazwa użytkownika: {{ username }}</p>
-        <p>Wartość pola haslo: {{ password }}</p>
         <error-modal
             :errorMessageVisible="errorMessageVisible"
             :hideErrorMessage="hideErrorMessage"
             :errors="errors"
         ></error-modal>
+    </div>
+    <div v-if="alertProps.show">
+        <reusable-alert
+            :color="alertProps.color"
+            :icon="alertProps.icon"
+            :text="alertProps.text"
+            :title="alertProps.title"
+        ></reusable-alert>
     </div>
 </template>
 
@@ -39,7 +45,8 @@ import InputField from "../inputComponents/InputField.vue";
 import SubmitButton from "../buttons/SubmitButton.vue";
 import AppNameText from "../textComponents/AppNameText.vue";
 import ErrorModal from "../modals/ErrorModal.vue";
-import { fetchData } from "../../../helpers/api";
+import ReusableAlert from "../modals/ReusableAlert.vue";
+import { checkAndLogin } from "../../../helpers/api";
 import { ref } from "vue";
 export default {
     components: {
@@ -47,6 +54,7 @@ export default {
         "button-login": SubmitButton,
         "app-name": AppNameText,
         "error-modal": ErrorModal,
+        "reusable-alert": ReusableAlert,
     },
     data() {
         return {
@@ -58,11 +66,21 @@ export default {
                 password: "",
                 loginOrPassword: "",
             },
+            alertProps: {
+                show: false,
+                color: "",
+                icon: "",
+                text: "",
+                title: "",
+            },
         };
     },
     methods: {
         //tu musi być update tego pola, które definiuje w komponencie
         // to pole jest tutaj bo tu chcemy miec dane ktore wyslemy do zapisu
+        updatePropsValue(value) {
+            this.alertProps = value;
+        },
         updateUsername(event) {
             this.username = event.target.value;
         },
@@ -94,67 +112,34 @@ export default {
         hideErrorMessage() {
             this.errorMessageVisible = false;
         },
-        login() {
-            if (this.validate()) {
-                this.getUser();
-                this.$router.push("/menu");
-            } else {
-                console.log("Walidacja nie powiodła się.");
-            }
+        navigateToMenu() {
+            this.$router.push("/menu"); // Nawigacja do menu
         },
-        /* Dominiki
-        async login() {
-            try {
-                const response = await fetchData(
-                    `http://localhost:3010/api/users?userName=${this.username}`
-                );
-                if (response) {
-                    const user = response;
-                    localStorage.setItem("login", user.userName);
-                    this.$router.push("/menu");
-                }
-            } catch (err) {
-                console.log(err);
-            }
-        },
-        */
-
-        /* wspolne
         async login() {
             try {
                 if (this.validate()) {
-                    const response = await fetchData(
-                        `http://localhost:3010/api/users?userName=${this.username}`
+                    await checkAndLogin(
+                        `http://localhost:3010/api/users?userName=${this.username}`,
+                        {},
+                        this.username,
+                        this.updatePropsValue,
+                        this.navigateToMenu
                     );
-                    if (response) {
-                        const user = response;
-                        localStorage.setItem("login", user.userName);
-                        this.$router.push("/menu");
-                    }
                 }
             } catch (err) {
                 console.log(err);
-            }
-        },
-        */
-        async getUser() {
-            console.log("hej z getUser");
-            //pobrac z bazy uzytkownika o podanym loginie this.username:
-            try {
-                console.log("hej z try");
-                const response = await fetchData(
-                    `http://localhost:3010/api/users?userName=${this.username}`
-                );
-                const user = response;
-                console.log("Zalogowany użytkownik:", user);
-            } catch (error) {
-                console.log("hej z catcha"); //TODO: obsłużyć error w api.js
-                console.log(
-                    "Użytkownik o podanej nazwie nie został znaleziony."
-                );
-                // Dalsza logika w przypadku, gdy użytkownik nie został znaleziony
                 this.errors.loginOrPassword = "login lub hasło";
-                this.showErrorMessage(); //wyswietl bład gdy login lub hasło beda złe
+                this.showErrorMessage();
+            } finally {
+                setTimeout(() => {
+                    this.alertProps = {
+                        show: false,
+                        color: "",
+                        icon: "",
+                        text: "",
+                        title: "",
+                    };
+                }, 3000);
             }
         },
     },
