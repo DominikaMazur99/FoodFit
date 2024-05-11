@@ -90,6 +90,7 @@ export const checkAndLogin = async (
     url,
     data = {},
     userLogin,
+    userPassword,
     updateProps,
     navigateToMenu
 ) => {
@@ -99,15 +100,15 @@ export const checkAndLogin = async (
             const existingData = await response.json();
             const existingEntry = existingData.find(
                 (entry) =>
-                    entry.userName.toLowerCase() === userLogin.toLowerCase()
+                    entry.userName.toLowerCase() === userLogin.toLowerCase() &&
+                    entry.password === userPassword
             );
-            console.log(existingEntry);
             if (existingEntry) {
                 navigateToMenu(); // Wywołanie funkcji nawigacji do menu
             } else {
                 updateProps({
                     show: true,
-                    color: "#red",
+                    color: "red",
                     text: "Wystąpił błąd..",
                     title: "Dane logowania są niepoprawne.",
                 });

@@ -109,14 +109,13 @@ export default {
                         `http://localhost:3010/api/users?userName=${this.username}`,
                         {},
                         this.username,
+                        this.password,
                         this.updatePropsValue,
                         this.navigateToMenu
                     );
                 }
             } catch (err) {
                 console.log(err);
-                this.errors.loginOrPassword = "login lub hasło";
-                this.showErrorMessage();
             } finally {
                 setTimeout(() => {
                     this.alertProps = {
