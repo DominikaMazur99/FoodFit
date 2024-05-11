@@ -33,7 +33,7 @@
             ></v-list-item>
         </v-list-group>
     </v-list>
-    <reusable-modal :dialog="dialog">
+    <reusable-modal :dialog="dialog" :closeModal="closeModal">
         <reusable-select
             name="products"
             label="produkty"
@@ -59,7 +59,7 @@
                 v-for="product in productList"
                 :key="`${product.name}/${product.calories}`"
                 :title="product.name"
-                :subtitle="`${product.calories}kcl, ${product.gram}g`"
+                :subtitle="`${product.calories}kcal, ${product.gram}g`"
             ></v-list-item>
         </v-list>
     </reusable-modal>
@@ -113,7 +113,6 @@ export default {
     },
     methods: {
         showModalToAddMeals(meal) {
-            console.log("jestem");
             this.mealType = meal;
             this.dialog = true;
         },
@@ -139,6 +138,9 @@ export default {
             };
             console.log(meal, this.mealType);
             this.productList.push(meal);
+        },
+        closeModal() {
+            this.dialog = false;
         },
     },
     async mounted() {

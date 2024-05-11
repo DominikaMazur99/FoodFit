@@ -13,7 +13,6 @@
                 <activity-journal></activity-journal
             ></v-window-item>
         </v-window>
-        <button @click="add">ADD</button>
     </div>
 </template>
 
