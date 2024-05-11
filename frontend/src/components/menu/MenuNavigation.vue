@@ -13,12 +13,7 @@
 
             <menu-btn name="Postępy"></menu-btn>
 
-            <router-link to="/">
-                <menu-btn
-                    name="Wyloguj"
-                    @click="localStorage.clear()"
-                ></menu-btn>
-            </router-link>
+            <menu-btn name="Wyloguj" @click="logout"></menu-btn>
         </div>
     </div>
 </template>
@@ -30,6 +25,12 @@ export default {
     components: {
         "app-name": AppNameText,
         "menu-btn": MenuButton,
+    },
+    methods: {
+        logout() {
+            localStorage.clear();
+            this.$router.push("/");
+        },
     },
 };
 </script>

@@ -104,6 +104,7 @@ export const checkAndLogin = async (
                     entry.password === userPassword
             );
             if (existingEntry) {
+                localStorage.setItem("login", userLogin);
                 navigateToMenu(); // Wywołanie funkcji nawigacji do menu
             } else {
                 updateProps({

@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-export default createRouter({
+const router = createRouter({
     history: createWebHistory(),
     routes: [
         {
@@ -17,16 +17,30 @@ export default createRouter({
             path: "/menu",
             name: "MenuView",
             component: () => import("./views/MenuView.vue"),
+            meta: { requiresAuth: true }, // Oznacz trasę, która wymaga autoryzacji
         },
         {
             path: "/zapotrzebowanie_kaloryczne",
             name: "CaloricDemandView",
             component: () => import("./views/CaloricDemandView.vue"),
+            meta: { requiresAuth: true }, // Oznacz trasę, która wymaga autoryzacji
         },
         {
             path: "/dziennik",
             name: "JournalView",
             component: () => import("./views/JournalView.vue"),
+            meta: { requiresAuth: true }, // Oznacz trasę, która wymaga autoryzacji
         },
     ],
 });
+
+router.beforeEach((to, from, next) => {
+    const isLoggedIn = localStorage.getItem("login");
+    if (to.matched.some((record) => record.meta.requiresAuth) && !isLoggedIn) {
+        next({ name: "Login" }); // przekierowanie do strony logowania jeśli użytkownik nie jest zalogowany
+    } else {
+        next();
+    }
+});
+
+export default router;
