@@ -9,13 +9,17 @@
             name="username"
             label="Nazwa użytkownika"
             v-model="username"
+            @input="clearError('username')"
             @change="updateUsername"
+            :error="errorsMessages.username"
         ></input-field>
         <input-field
             name="password"
             label="Hasło"
             type="password"
+            @input="clearError('password')"
             @change="updatePassword"
+            :error="errorsMessages.password"
         ></input-field>
         <button-login name="Zaloguj" @click="login"></button-login>
 
@@ -24,11 +28,6 @@
                 >Nie posiadasz jeszcze konta? Zarejestruj się!</router-link
             >
         </p>
-        <error-modal
-            :errorMessageVisible="errorMessageVisible"
-            :hideErrorMessage="hideErrorMessage"
-            :errors="errors"
-        ></error-modal>
     </div>
     <div v-if="alertProps.show">
         <reusable-alert
@@ -48,6 +47,7 @@ import ErrorModal from "../modals/ErrorModal.vue";
 import ReusableAlert from "../modals/ReusableAlert.vue";
 import { checkAndLogin } from "../../../helpers/api";
 import { ref } from "vue";
+
 export default {
     components: {
         "input-field": InputField,
@@ -66,6 +66,11 @@ export default {
                 password: "",
                 loginOrPassword: "",
             },
+            errorsMessages: {
+                username: "",
+                password: "",
+            },
+            errorMessage: "",
             alertProps: {
                 show: false,
                 color: "",
@@ -76,10 +81,11 @@ export default {
         };
     },
     methods: {
-        //tu musi być update tego pola, które definiuje w komponencie
-        // to pole jest tutaj bo tu chcemy miec dane ktore wyslemy do zapisu
         updatePropsValue(value) {
             this.alertProps = value;
+        },
+        updateErrorMessage(message) {
+            this.errorMessage = message;
         },
         updateUsername(event) {
             this.username = event.target.value;
@@ -90,20 +96,16 @@ export default {
         validate() {
             let correct = true;
             if (this.username == "") {
-                this.errors.username = "login";
+                this.errorsMessages.username =
+                    "Pole nie może być puste. Uzupełnij je.";
                 correct = false;
-            } else {
-                this.errors.username = "";
             }
             if (this.password == "") {
-                this.errors.password = "hasło";
+                this.errorsMessages.password =
+                    "Pole nie może być puste. Uzupełnij je.";
                 correct = false;
-            } else {
-                this.errors.password = "";
             }
-            if (Object.values(this.errors).some((err) => err !== "")) {
-                this.showErrorMessage();
-            }
+
             return correct;
         },
         showErrorMessage() {
@@ -141,6 +143,10 @@ export default {
                     };
                 }, 3000);
             }
+        },
+        clearError(fieldName) {
+            // Zerowanie komunikatu błędu dla danego pola po wpisaniu wartości
+            this.errorsMessages[fieldName] = "";
         },
     },
 };

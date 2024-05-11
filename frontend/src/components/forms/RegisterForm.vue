@@ -75,6 +75,12 @@ export default {
                 text: "",
                 title: "",
             },
+            errorMessageVisible: false,
+            errors: {
+                login: "",
+                password: "",
+                loginOrPassword: "",
+            },
         };
     },
     methods: {
@@ -103,7 +109,6 @@ export default {
                         text: "",
                         title: "",
                     };
-                    this.$router.push("/");
                 }, 3000);
             }
         },
@@ -122,6 +127,49 @@ export default {
         updateEmail(event) {
             const selectedValue = event?.target?.value || "";
             this.email = selectedValue;
+        },
+        validate() {
+            let correct = true;
+
+            // Sprawdzenie pola nazwy użytkownika
+            if (this.username === "") {
+                this.errors.username = "login";
+                correct = false;
+            } else {
+                this.errors.username = "";
+            }
+
+            // Sprawdzenie pola hasła
+            if (this.password === "") {
+                this.errors.password = "hasło";
+                correct = false;
+            } else {
+                this.errors.password = "";
+            }
+
+            // Sprawdzenie pola adresu e-mail
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (this.email === "" || !emailPattern.test(this.email)) {
+                this.errors.email =
+                    "Wprowadź poprawny adres email (np. a@a.pl)";
+                correct = false;
+            } else {
+                this.errors.email = "";
+            }
+
+            // Wyświetlenie komunikatu o błędzie, jeśli istnieją jakiekolwiek błędy
+            if (Object.values(this.errors).some((err) => err !== "")) {
+                this.showErrorMessage();
+            }
+
+            return correct;
+        },
+
+        showErrorMessage() {
+            this.errorMessageVisible = true;
+        },
+        hideErrorMessage() {
+            this.errorMessageVisible = false;
         },
     },
 };

@@ -17,7 +17,7 @@
                 v-if="Object.values(errors).some((err) => err !== '')"
                 class="error-message-heading"
             >
-                Uzupełnij brakujące informacje:
+                {{ message }}
             </p>
             <p class="error-message" v-for="error in errors" :key="error">
                 {{ error }}
@@ -40,6 +40,7 @@ export default {
         errorMessageVisible: Boolean,
         hideErrorMessage: Function,
         errors: Object,
+        message: String,
     },
     components: {
         SvgIcon,
