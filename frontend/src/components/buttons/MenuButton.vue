@@ -31,7 +31,7 @@ export default {
     background-color: #baccac;
     color: #2f7d28;
     font-size: 20px;
-    font-weight: lighter;
+    font-weight: 350;
 }
 
 .menu-btn:hover {
