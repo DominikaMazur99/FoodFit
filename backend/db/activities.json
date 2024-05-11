@@ -1,0 +1,786 @@
+[
+    {
+        "name": "Aerobik (intensywnie)",
+        "calories_on_hour": 511
+    },
+    {
+        "name": "Aerobik (spokojnie)",
+        "calories_on_hour": 364
+    },
+    {
+        "name": "Aerobik (umiarkowane tempo)",
+        "calories_on_hour": 420
+    },
+    {
+        "name": "Aerobik z ciężarkami (4.5 - 6.5 kg)",
+        "calories_on_hour": 700
+    },
+    {
+        "name": "Aqua Aerobik (aerobik wodny)",
+        "calories_on_hour": 385
+    },
+    {
+        "name": "Badminton",
+        "calories_on_hour": 399
+    },
+    {
+        "name": "Balet (występ lub duży wysiłek)",
+        "calories_on_hour": 476
+    },
+    {
+        "name": "Balet (zajęcia, próba)",
+        "calories_on_hour": 350
+    },
+    {
+        "name": "Bieganie 10 km/h",
+        "calories_on_hour": 735
+    },
+    {
+        "name": "Bieganie 11 km/h",
+        "calories_on_hour": 770
+    },
+    {
+        "name": "Bieganie 12 km/h",
+        "calories_on_hour": 826
+    },
+    {
+        "name": "Bieganie 13 km/h (szybko)",
+        "calories_on_hour": 938
+    },
+    {
+        "name": "Bieganie 14 km/h (bardzo szybko)",
+        "calories_on_hour": 1001
+    },
+    {
+        "name": "Bieganie 15 km/h (bardzo szybko)",
+        "calories_on_hour": 1071
+    },
+    {
+        "name": "Bieganie 16 km/h (bardzo szybko)",
+        "calories_on_hour": 1134
+    },
+    {
+        "name": "Bieganie 17 km/h (sprint)",
+        "calories_on_hour": 1204
+    },
+    {
+        "name": "Bieganie 18 km/h (sprint)",
+        "calories_on_hour": 1267
+    },
+    {
+        "name": "Bieganie 6.5 km/h (trucht)",
+        "calories_on_hour": 420
+    },
+    {
+        "name": "Bieganie 7 km/h (powoli)",
+        "calories_on_hour": 539
+    },
+    {
+        "name": "Bieganie 8 km/h (powoli)",
+        "calories_on_hour": 581
+    },
+    {
+        "name": "Bieganie 9 km/h",
+        "calories_on_hour": 672
+    },
+    {
+        "name": "Bieganie 9.5 km/h",
+        "calories_on_hour": 686
+    },
+    {
+        "name": "Bilard",
+        "calories_on_hour": 168
+    },
+    {
+        "name": "Boks",
+        "calories_on_hour": 651
+    },
+    {
+        "name": "Brzuszki niepełne",
+        "calories_on_hour": 196
+    },
+    {
+        "name": "Brzuszki pełne (energicznie)",
+        "calories_on_hour": 560
+    },
+    {
+        "name": "Brzuszki pełne (spokojne tempo)",
+        "calories_on_hour": 196
+    },
+    {
+        "name": "Brzuszki pełne (umiarkowane tempo)",
+        "calories_on_hour": 266
+    },
+    {
+        "name": "Callanetics",
+        "calories_on_hour": 315
+    },
+    {
+        "name": "Chodzenie 2 km/h (bardzo wolno)",
+        "calories_on_hour": 140
+    },
+    {
+        "name": "Chodzenie 3 km/h (wolno)",
+        "calories_on_hour": 168
+    },
+    {
+        "name": "Chodzenie 4 km/h (szybko)",
+        "calories_on_hour": 203
+    },
+    {
+        "name": "Chodzenie 5 km/h (szybko)",
+        "calories_on_hour": 245
+    },
+    {
+        "name": "Chodzenie 6 km/h (szybko)",
+        "calories_on_hour": 315
+    },
+    {
+        "name": "Chodzenie po górach",
+        "calories_on_hour": 371
+    },
+    {
+        "name": "Czytanie",
+        "calories_on_hour": 38
+    },
+    {
+        "name": "Ergometr ramion",
+        "calories_on_hour": 196
+    },
+    {
+        "name": "Ergometr wioślarski (wolno)",
+        "calories_on_hour": 336
+    },
+    {
+        "name": "Ergometr wioślarski umiarkowanie (6 METS)",
+        "calories_on_hour": 420
+    },
+    {
+        "name": "Ergometr wioślarski, bardzo szybko (12 METS)",
+        "calories_on_hour": 840
+    },
+    {
+        "name": "Ergometr wioślarski, szybko (9 METS)",
+        "calories_on_hour": 630
+    },
+    {
+        "name": "Ergometr wioślarski, umiarkowanie (7 METS)",
+        "calories_on_hour": 490
+    },
+    {
+        "name": "Golf",
+        "calories_on_hour": 315
+    },
+    {
+        "name": "Gotowanie",
+        "calories_on_hour": 105
+    },
+    {
+        "name": "Gra Frisbee",
+        "calories_on_hour": 210
+    },
+    {
+        "name": "Grabienie trawnika",
+        "calories_on_hour": 280
+    },
+    {
+        "name": "Hula hop",
+        "calories_on_hour": 280
+    },
+    {
+        "name": "Jazda konna",
+        "calories_on_hour": 280
+    },
+    {
+        "name": "Jazda na deskorolce",
+        "calories_on_hour": 371
+    },
+    {
+        "name": "Jazda na łyżwach",
+        "calories_on_hour": 490
+    },
+    {
+        "name": "Jazda na nartach biegówkach",
+        "calories_on_hour": 574
+    },
+    {
+        "name": "Jazda na nartach wodnych",
+        "calories_on_hour": 490
+    },
+    {
+        "name": "Jazda na nartach zjazdówkach",
+        "calories_on_hour": 511
+    },
+    {
+        "name": "Jazda na rolkach",
+        "calories_on_hour": 490
+    },
+    {
+        "name": "Jazda na rolkach",
+        "calories_on_hour": 399
+    },
+    {
+        "name": "Jazda na rowerze (10 km/h)",
+        "calories_on_hour": 245
+    },
+    {
+        "name": "Jazda na rowerze (11 -15km/h)",
+        "calories_on_hour": 280
+    },
+    {
+        "name": "Jazda na rowerze (16-19 km/h)",
+        "calories_on_hour": 476
+    },
+    {
+        "name": "Jazda na rowerze (19-22 km/h)",
+        "calories_on_hour": 560
+    },
+    {
+        "name": "Jazda na rowerze (23-25 km/h)",
+        "calories_on_hour": 700
+    },
+    {
+        "name": "Jazda na rowerze (25-30 km/h)",
+        "calories_on_hour": 840
+    },
+    {
+        "name": "Jazda na rowerze (powyżej 30 km/h)",
+        "calories_on_hour": 1106
+    },
+    {
+        "name": "Jazda na snowboardzie",
+        "calories_on_hour": 490
+    },
+    {
+        "name": "Joga (ogólnie)",
+        "calories_on_hour": 175
+    },
+    {
+        "name": "Joga Hatha",
+        "calories_on_hour": 175
+    },
+    {
+        "name": "Joga Power",
+        "calories_on_hour": 280
+    },
+    {
+        "name": "Jogging wodny",
+        "calories_on_hour": 686
+    },
+    {
+        "name": "Judo",
+        "calories_on_hour": 700
+    },
+    {
+        "name": "Kajakarstwo 3 - 6 km/h (wolne tempo)",
+        "calories_on_hour": 196
+    },
+    {
+        "name": "Kajakarstwo 6.5 - 9.5 km/h (umiarkowane tempo)",
+        "calories_on_hour": 406
+    },
+    {
+        "name": "Kajakarstwo powyżej 9.5 km/h (szybkie tempo)",
+        "calories_on_hour": 875
+    },
+    {
+        "name": "Karate",
+        "calories_on_hour": 700
+    },
+    {
+        "name": "Kitesurfing (kiteboarding)",
+        "calories_on_hour": 770
+    },
+    {
+        "name": "Kolarstwo górskie",
+        "calories_on_hour": 595
+    },
+    {
+        "name": "Koszenie trawnika",
+        "calories_on_hour": 315
+    },
+    {
+        "name": "Koszykówka",
+        "calories_on_hour": 560
+    },
+    {
+        "name": "Krawiec",
+        "calories_on_hour": 175
+    },
+    {
+        "name": "Kręgle",
+        "calories_on_hour": 210
+    },
+    {
+        "name": "Leżenie",
+        "calories_on_hour": 35
+    },
+    {
+        "name": "Łowienie ryb",
+        "calories_on_hour": 210
+    },
+    {
+        "name": "Malowanie",
+        "calories_on_hour": 399
+    },
+    {
+        "name": "Murarz",
+        "calories_on_hour": 490
+    },
+    {
+        "name": "Mycie okien",
+        "calories_on_hour": 231
+    },
+    {
+        "name": "Mycie samochodu",
+        "calories_on_hour": 308
+    },
+    {
+        "name": "Nauczyciel",
+        "calories_on_hour": 105
+    },
+    {
+        "name": "Nordic Walking - bardzo szybko 7.3 km/h",
+        "calories_on_hour": 504
+    },
+    {
+        "name": "Nordic Walking - szybko 6 km/h",
+        "calories_on_hour": 476
+    },
+    {
+        "name": "Nordic Walking - średnie tempo 5 km/h",
+        "calories_on_hour": 392
+    },
+    {
+        "name": "Nordic Walking - wolno 4 km/h",
+        "calories_on_hour": 308
+    },
+    {
+        "name": "Nurkowanie na zatrzymanym oddechu (rekreacyjnie)",
+        "calories_on_hour": 490
+    },
+    {
+        "name": "Nurkowanie na zatrzymanym oddechu (tempo szybkie)",
+        "calories_on_hour": 1106
+    },
+    {
+        "name": "Nurkowanie na zatrzymanym oddechu (tempo umiarkowane)",
+        "calories_on_hour": 826
+    },
+    {
+        "name": "Nurkowanie z rurką (snorkeling)",
+        "calories_on_hour": 350
+    },
+    {
+        "name": "Nurkowanie ze sprzętem",
+        "calories_on_hour": 490
+    },
+    {
+        "name": "Odkurzanie",
+        "calories_on_hour": 315
+    },
+    {
+        "name": "Odśnieżanie",
+        "calories_on_hour": 420
+    },
+    {
+        "name": "Piekarz",
+        "calories_on_hour": 280
+    },
+    {
+        "name": "Pielęgniarka",
+        "calories_on_hour": 280
+    },
+    {
+        "name": "Pilates",
+        "calories_on_hour": 210
+    },
+    {
+        "name": "Piłka nożna",
+        "calories_on_hour": 630
+    },
+    {
+        "name": "Piłka ręczna",
+        "calories_on_hour": 840
+    },
+    {
+        "name": "Ping pong",
+        "calories_on_hour": 280
+    },
+    {
+        "name": "Pływanie kraulem (szybkie tempo)",
+        "calories_on_hour": 700
+    },
+    {
+        "name": "Pływanie kraulem (umiarkowane tempo)",
+        "calories_on_hour": 581
+    },
+    {
+        "name": "Pływanie kraulem (wolne tempo)",
+        "calories_on_hour": 406
+    },
+    {
+        "name": "Pływanie stylem grzbietowym (szybko)",
+        "calories_on_hour": 665
+    },
+    {
+        "name": "Pływanie stylem grzbietowym (wolno)",
+        "calories_on_hour": 336
+    },
+    {
+        "name": "Pływanie stylem klasycznym (szybko)",
+        "calories_on_hour": 721
+    },
+    {
+        "name": "Pływanie stylem klasycznym (wolno)",
+        "calories_on_hour": 371
+    },
+    {
+        "name": "Pływanie stylem motylkowym",
+        "calories_on_hour": 966
+    },
+    {
+        "name": "Podciąganie (energicznie)",
+        "calories_on_hour": 560
+    },
+    {
+        "name": "Podciąganie (umiarkowane tempo)",
+        "calories_on_hour": 266
+    },
+    {
+        "name": "Podnoszenie ciężarów",
+        "calories_on_hour": 420
+    },
+    {
+        "name": "Pompki (energicznie)",
+        "calories_on_hour": 560
+    },
+    {
+        "name": "Pompki (umiarkowane tempo)",
+        "calories_on_hour": 266
+    },
+    {
+        "name": "Praca biurowa (chodząca)",
+        "calories_on_hour": 140
+    },
+    {
+        "name": "Praca biurowa (siedząca)",
+        "calories_on_hour": 105
+    },
+    {
+        "name": "Praca w ogrodzie",
+        "calories_on_hour": 350
+    },
+    {
+        "name": "Pracownik budowy",
+        "calories_on_hour": 420
+    },
+    {
+        "name": "Prasowanie",
+        "calories_on_hour": 140
+    },
+    {
+        "name": "Przysiad wykroczny",
+        "calories_on_hour": 266
+    },
+    {
+        "name": "Przysiady",
+        "calories_on_hour": 350
+    },
+    {
+        "name": "Robienie zakupów",
+        "calories_on_hour": 161
+    },
+    {
+        "name": "Rower stacjonarny, bardzo szybko (11 METS)",
+        "calories_on_hour": 770
+    },
+    {
+        "name": "Rower stacjonarny, bardzo szybko (12 METS)",
+        "calories_on_hour": 840
+    },
+    {
+        "name": "Rower stacjonarny, bardzo wolno (3 METS)",
+        "calories_on_hour": 210
+    },
+    {
+        "name": "Rower stacjonarny, szybko (8 METS)",
+        "calories_on_hour": 560
+    },
+    {
+        "name": "Rower stacjonarny, szybko (9 METS)",
+        "calories_on_hour": 630
+    },
+    {
+        "name": "Rower stacjonarny, umiarkowanie (6 METS)",
+        "calories_on_hour": 420
+    },
+    {
+        "name": "Rower stacjonarny, umiarkowanie (7 METS)",
+        "calories_on_hour": 490
+    },
+    {
+        "name": "Rower stacjonarny, wolno (4 METS)",
+        "calories_on_hour": 280
+    },
+    {
+        "name": "Rower stacjonarny, wolno (5 METS)",
+        "calories_on_hour": 350
+    },
+    {
+        "name": "Rzutki",
+        "calories_on_hour": 161
+    },
+    {
+        "name": "Siatkówka",
+        "calories_on_hour": 280
+    },
+    {
+        "name": "Siatkówka plażowa",
+        "calories_on_hour": 560
+    },
+    {
+        "name": "Siatkówka wodna",
+        "calories_on_hour": 350
+    },
+    {
+        "name": "Siłownia (ćwiczenia intensywne)",
+        "calories_on_hour": 595
+    },
+    {
+        "name": "Siłownia (lekkie ćwiczenia)",
+        "calories_on_hour": 245
+    },
+    {
+        "name": "Siłownia (średnio intensywnie)",
+        "calories_on_hour": 490
+    },
+    {
+        "name": "Skakanka (intensywnie)",
+        "calories_on_hour": 770
+    },
+    {
+        "name": "Skakanka (spokojnie)",
+        "calories_on_hour": 574
+    },
+    {
+        "name": "Slow jogging",
+        "calories_on_hour": 385
+    },
+    {
+        "name": "Spacer",
+        "calories_on_hour": 245
+    },
+    {
+        "name": "Spacer",
+        "calories_on_hour": 245
+    },
+    {
+        "name": "Spacer szybki ( 6 km/h )",
+        "calories_on_hour": 315
+    },
+    {
+        "name": "Spacer wolny",
+        "calories_on_hour": 196
+    },
+    {
+        "name": "Spinning (trening na rowerach)",
+        "calories_on_hour": 595
+    },
+    {
+        "name": "Sprzątanie domu",
+        "calories_on_hour": 245
+    },
+    {
+        "name": "Sprzedawca",
+        "calories_on_hour": 140
+    },
+    {
+        "name": "Squash",
+        "calories_on_hour": 840
+    },
+    {
+        "name": "Step aerobik (wys.stepu: 10 cm)",
+        "calories_on_hour": 385
+    },
+    {
+        "name": "Step aerobik (wys.stepu: 15-20 cm)",
+        "calories_on_hour": 525
+    },
+    {
+        "name": "Step aerobik (wys.stepu: 25-30 cm)",
+        "calories_on_hour": 672
+    },
+    {
+        "name": "Steper",
+        "calories_on_hour": 490
+    },
+    {
+        "name": "StepMania",
+        "calories_on_hour": 581
+    },
+    {
+        "name": "Stolarz",
+        "calories_on_hour": 245
+    },
+    {
+        "name": "Strażak",
+        "calories_on_hour": 840
+    },
+    {
+        "name": "Surfing (rekreacyjnie)",
+        "calories_on_hour": 210
+    },
+    {
+        "name": "Surfing (zawody)",
+        "calories_on_hour": 350
+    },
+    {
+        "name": "Symulator schodów - stairmill",
+        "calories_on_hour": 630
+    },
+    {
+        "name": "Śpiewanie",
+        "calories_on_hour": 105
+    },
+    {
+        "name": "Taniec - salsa",
+        "calories_on_hour": 315
+    },
+    {
+        "name": "Taniec brzucha",
+        "calories_on_hour": 315
+    },
+    {
+        "name": "Taniec brzucha",
+        "calories_on_hour": 315
+    },
+    {
+        "name": "Taniec flamenco",
+        "calories_on_hour": 315
+    },
+    {
+        "name": "Taniec hip-hop",
+        "calories_on_hour": 385
+    },
+    {
+        "name": "Taniec jazzowy (występ lub duży wysiłek)",
+        "calories_on_hour": 476
+    },
+    {
+        "name": "Taniec jazzowy (zajęcia, próba)",
+        "calories_on_hour": 350
+    },
+    {
+        "name": "Taniec na rurze",
+        "calories_on_hour": 560
+    },
+    {
+        "name": "Taniec salsa",
+        "calories_on_hour": 315
+    },
+    {
+        "name": "Taniec swing",
+        "calories_on_hour": 315
+    },
+    {
+        "name": "Taniec towarzyski (szybkie tempo)",
+        "calories_on_hour": 385
+    },
+    {
+        "name": "Taniec towarzyski (wolne tempo)",
+        "calories_on_hour": 210
+    },
+    {
+        "name": "Taniec współczesny - modern dance (próba, zajęcia)",
+        "calories_on_hour": 336
+    },
+    {
+        "name": "Taniec współczesny - modern dance (występ lub duży wysiłek)",
+        "calories_on_hour": 476
+    },
+    {
+        "name": "Tenis",
+        "calories_on_hour": 560
+    },
+    {
+        "name": "Tenis ziemny",
+        "calories_on_hour": 616
+    },
+    {
+        "name": "Tragarz",
+        "calories_on_hour": 560
+    },
+    {
+        "name": "Trening rozciągający (streching)",
+        "calories_on_hour": 161
+    },
+    {
+        "name": "Trening z kettlami",
+        "calories_on_hour": 560
+    },
+    {
+        "name": "Trening z piłką gimnastyczną",
+        "calories_on_hour": 196
+    },
+    {
+        "name": "Trucht",
+        "calories_on_hour": 420
+    },
+    {
+        "name": "Urządzenie eliptyczne (orbitrek) - intensywnie",
+        "calories_on_hour": 560
+    },
+    {
+        "name": "Urządzenie eliptyczne (orbitrek) - umiarkowane tempo",
+        "calories_on_hour": 350
+    },
+    {
+        "name": "Wchodzenie po schodach",
+        "calories_on_hour": 308
+    },
+    {
+        "name": "Wędkowanie",
+        "calories_on_hour": 210
+    },
+    {
+        "name": "Windsurfing (rekreacyjnie)",
+        "calories_on_hour": 350
+    },
+    {
+        "name": "Windsurfing (ślizg, pompowanie)",
+        "calories_on_hour": 945
+    },
+    {
+        "name": "Wiosłowanie na łodzi",
+        "calories_on_hour": 280
+    },
+    {
+        "name": "Wioślarstwo",
+        "calories_on_hour": 595
+    },
+    {
+        "name": "Wspinaczka",
+        "calories_on_hour": 560
+    },
+    {
+        "name": "Wspinaczka skałkowa",
+        "calories_on_hour": 756
+    },
+    {
+        "name": "Zmywanie naczyń",
+        "calories_on_hour": 140
+    },
+    {
+        "name": "Zumba",
+        "calories_on_hour": 476
+    },
+    {
+        "name": "Żeglarstwo (rekreacyjnie)",
+        "calories_on_hour": 231
+    },
+    {
+        "name": "Żeglarstwo (sportowe)",
+        "calories_on_hour": 315
+    }
+]
