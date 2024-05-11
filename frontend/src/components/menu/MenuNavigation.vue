@@ -4,7 +4,9 @@
             <app-name></app-name>
         </div>
         <div class="btn-box">
-            <menu-btn name="Dziennik posiłków i aktywności"></menu-btn>
+            <router-link to="/dziennik">
+                <menu-btn name="Dziennik posiłków i aktywności"></menu-btn
+            ></router-link>
             <router-link to="/zapotrzebowanie_kaloryczne">
                 <menu-btn name="Zapotrzebowanie kaloryczne"></menu-btn>
             </router-link>
