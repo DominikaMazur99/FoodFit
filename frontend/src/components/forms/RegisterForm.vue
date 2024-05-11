@@ -9,27 +9,35 @@
             name="username"
             label="Nazwa użytkownika"
             v-model="username"
+            @input="clearError('username')"
             @change="updateUsername"
+            :error="errorsMessages.username"
         ></input-field>
         <input-field
             name="password"
             label="Hasło"
             type="password"
             v-model="password"
+            @input="clearError('password')"
             @change="updatePassword"
+            :error="errorsMessages.password"
         ></input-field>
         <input-field
             name="repeatPassword"
             label="Powtórz hasło"
             type="password"
             v-model="repeatPassword"
+            @input="clearError('repeatPassword')"
             @change="updateRepeatPassword"
+            :error="errorsMessages.repeatPassword"
         ></input-field>
         <input-field
             name="email"
             label="Email"
             v-model="email"
+            @input="clearError('email')"
             @change="updateEmail"
+            :error="errorsMessages.email"
         ></input-field>
 
         <button-login name="Zarejestruj" @click="register"></button-login>
@@ -40,7 +48,6 @@
     <div v-if="alertProps.show">
         <reusable-alert
             :color="alertProps.color"
-            :icon="alertProps.icon"
             :text="alertProps.text"
             :title="alertProps.title"
         ></reusable-alert>
@@ -71,15 +78,14 @@ export default {
             alertProps: {
                 show: false,
                 color: "",
-                icon: "",
                 text: "",
                 title: "",
             },
-            errorMessageVisible: false,
-            errors: {
-                login: "",
+            errorsMessages: {
+                username: "",
                 password: "",
-                loginOrPassword: "",
+                repeatPassword: "",
+                email: "",
             },
         };
     },
@@ -89,15 +95,18 @@ export default {
         },
         async register() {
             try {
-                await checkAndRegister(
-                    "http://localhost:3010/api/users",
-                    {
-                        userName: this.username,
-                        password: this.password,
-                    },
-                    this.username,
-                    this.updatePropsValue
-                );
+                if (this.validate()) {
+                    await checkAndRegister(
+                        "http://localhost:3010/api/users",
+                        {
+                            userName: this.username,
+                            password: this.password,
+                        },
+                        this.username,
+                        this.updatePropsValue,
+                        this.navigateToLogin
+                    );
+                }
             } catch (err) {
                 console.log(err);
             } finally {
@@ -130,36 +139,36 @@ export default {
         },
         validate() {
             let correct = true;
-
-            // Sprawdzenie pola nazwy użytkownika
-            if (this.username === "") {
-                this.errors.username = "login";
-                correct = false;
-            } else {
-                this.errors.username = "";
-            }
-
-            // Sprawdzenie pola hasła
-            if (this.password === "") {
-                this.errors.password = "hasło";
-                correct = false;
-            } else {
-                this.errors.password = "";
-            }
-
-            // Sprawdzenie pola adresu e-mail
             const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (this.email === "" || !emailPattern.test(this.email)) {
-                this.errors.email =
-                    "Wprowadź poprawny adres email (np. a@a.pl)";
-                correct = false;
-            } else {
-                this.errors.email = "";
-            }
 
-            // Wyświetlenie komunikatu o błędzie, jeśli istnieją jakiekolwiek błędy
-            if (Object.values(this.errors).some((err) => err !== "")) {
-                this.showErrorMessage();
+            if (this.username == "") {
+                this.errorsMessages.username =
+                    "Pole nie może być puste. Uzupełnij je.";
+                correct = false;
+            }
+            if (this.password == "") {
+                this.errorsMessages.password =
+                    "Pole nie może być puste. Uzupełnij je.";
+                correct = false;
+            }
+            if (this.repeatPassword == "") {
+                this.errorsMessages.repeatPassword =
+                    "Pole nie może być puste. Uzupełnij je.";
+                correct = false;
+            }
+            if (this.repeatPassword !== this.password) {
+                this.errorsMessages.repeatPassword = "Hasła nie są zgodne.";
+                correct = false;
+            }
+            if (this.email == "") {
+                this.errorsMessages.email =
+                    "Pole nie może być puste. Uzupełnij je.";
+                correct = false;
+            }
+            if (!emailPattern.test(this.email)) {
+                this.errorsMessages.email =
+                    "Email musi posiadać formę 'test@test.pl'";
+                correct = false;
             }
 
             return correct;
@@ -170,6 +179,13 @@ export default {
         },
         hideErrorMessage() {
             this.errorMessageVisible = false;
+        },
+        clearError(fieldName) {
+            // Zerowanie komunikatu błędu dla danego pola po wpisaniu wartości
+            this.errorsMessages[fieldName] = "";
+        },
+        navigateToLogin() {
+            this.$router.push("/"); // Nawigacja do menu
         },
     },
 };

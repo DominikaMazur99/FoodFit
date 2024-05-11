@@ -49,7 +49,8 @@ export const checkAndRegister = async (
     url,
     data = {},
     userLogin,
-    updateProps
+    updateProps,
+    navigateToLogin
 ) => {
     try {
         const response = await fetch(`${url}/`);
@@ -63,21 +64,19 @@ export const checkAndRegister = async (
                 console.log("użytkownik istnieje w bazie, zaloguj się");
                 updateProps({
                     show: true,
-                    color: "error",
-                    icon: "$error",
+                    color: "red",
                     title: "Wystąpił błąd.",
                     text: "Taki użytkownik już istnieje, spróbuj się zalogować.",
                 });
             } else {
-                console.log("jestem");
                 await fetchData(url, "POST", data);
                 updateProps({
                     show: true,
-                    color: "success",
-                    icon: "$success",
+                    color: "green",
                     title: "Udało się.",
                     text: "Użytkownik został zarejestrowany.",
                 });
+                navigateToLogin();
             }
         } else {
             throw new Error(`Error ${response.status}: ${response.statusText}`);
@@ -108,8 +107,7 @@ export const checkAndLogin = async (
             } else {
                 updateProps({
                     show: true,
-                    color: "error",
-                    icon: "$error",
+                    color: "#red",
                     text: "Wystąpił błąd..",
                     title: "Dane logowania są niepoprawne.",
                 });

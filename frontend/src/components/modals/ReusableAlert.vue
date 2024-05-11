@@ -1,10 +1,21 @@
 <template>
     <div class="overlay"></div>
-    <div class="error-message-container">
+    <div
+        class="error-message-container"
+        :style="{
+            borderColor: color === 'red' ? '#f4bbbb' : '#baccac',
+            backgroundColor: color === 'red' ? '#f4bbbb' : '#baccac',
+        }"
+    >
         <div class="err-message">
             <p class="error-message-heading">{{ title }}</p>
             <p class="error-message">{{ text }}</p>
         </div>
+        <svg-icon
+            :path="path"
+            class="error-close-button"
+            @click="$emit('close')"
+        ></svg-icon>
     </div>
 </template>
 
@@ -20,7 +31,6 @@ export default {
     },
     props: {
         color: String,
-        icon: String,
         title: String,
         text: String,
     },
@@ -45,12 +55,12 @@ export default {
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #f4bbbb;
+    background-color: #fff; /* domyślne tło */
+    border: 3px solid; /* domyślne obramowanie */
     padding: 10px;
     border-radius: 10px;
     z-index: 1000;
     min-width: 300px;
-    border: 3px solid #e29696;
 }
 .error-close-button {
     position: absolute;

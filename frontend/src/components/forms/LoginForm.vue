@@ -32,7 +32,6 @@
     <div v-if="alertProps.show">
         <reusable-alert
             :color="alertProps.color"
-            :icon="alertProps.icon"
             :text="alertProps.text"
             :title="alertProps.title"
         ></reusable-alert>
@@ -60,21 +59,13 @@ export default {
         return {
             username: ref(""),
             password: ref(""),
-            errorMessageVisible: false,
-            errors: {
-                login: "",
-                password: "",
-                loginOrPassword: "",
-            },
             errorsMessages: {
                 username: "",
                 password: "",
             },
-            errorMessage: "",
             alertProps: {
                 show: false,
                 color: "",
-                icon: "",
                 text: "",
                 title: "",
             },
@@ -107,12 +98,6 @@ export default {
             }
 
             return correct;
-        },
-        showErrorMessage() {
-            this.errorMessageVisible = true;
-        },
-        hideErrorMessage() {
-            this.errorMessageVisible = false;
         },
         navigateToMenu() {
             this.$router.push("/menu"); // Nawigacja do menu
