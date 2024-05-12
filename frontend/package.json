@@ -11,6 +11,7 @@
   "dependencies": {
     "@jamescoyle/vue-icon": "^0.1.2",
     "@mdi/js": "^7.4.47",
+    "date-fns": "^3.6.0",
     "oh-vue-icons": "^1.0.0-rc3",
     "vue": "^3.4.15",
     "vue-router": "^4.3.1",

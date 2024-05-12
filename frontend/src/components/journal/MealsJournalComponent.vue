@@ -46,7 +46,6 @@ export default {
                 dessert: { name: "deser", calories: 110 },
                 supper: { name: "kolacja", calories: 200 },
             },
-            data2: {},
         };
     },
     methods: {
@@ -75,12 +74,10 @@ export default {
                 const formattedDate = this.selectedDate;
                 console.log(formattedDate);
                 const response = await fetchData(
-                    `http://localhost:3010/api/users?userName=${username}`
+                    `http://localhost:3010/api/user-meals?userName=${username}&date=${formattedDate}`
                 );
-                console.log("res", response);
-                const filterData = response.meals[0].meals.filter(
-                    (obj) => obj.date === formattedDate
-                );
+
+                const filterData = response.meals[0].meals;
                 if (filterData) {
                     const breakfast = filterData.filter(
                         (item) => item.type === "breakfast"
@@ -113,10 +110,6 @@ export default {
                         this.data.supper = supper;
                     }
                 }
-                console.log(filterData);
-                console.log(this.data);
-                this.data2 = response;
-                console.log(response);
             } catch (err) {
                 console.log(err);
             }

@@ -49,8 +49,7 @@ export const checkAndRegister = async (
     url,
     data = {},
     userLogin,
-    updateProps,
-    navigateToLogin
+    updateProps
 ) => {
     try {
         const response = await fetch(`${url}/`);
@@ -64,19 +63,21 @@ export const checkAndRegister = async (
                 console.log("użytkownik istnieje w bazie, zaloguj się");
                 updateProps({
                     show: true,
-                    color: "red",
+                    color: "error",
+                    icon: "$error",
                     title: "Wystąpił błąd.",
                     text: "Taki użytkownik już istnieje, spróbuj się zalogować.",
                 });
             } else {
+                console.log("jestem");
                 await fetchData(url, "POST", data);
                 updateProps({
                     show: true,
-                    color: "green",
+                    color: "success",
+                    icon: "$success",
                     title: "Udało się.",
                     text: "Użytkownik został zarejestrowany.",
                 });
-                navigateToLogin();
             }
         } else {
             throw new Error(`Error ${response.status}: ${response.statusText}`);
@@ -100,7 +101,7 @@ export const checkAndLogin = async (
             const existingData = await response.json();
             const existingEntry = existingData.find(
                 (entry) =>
-                    entry.userName.toLowerCase() === userLogin.toLowerCase() &&
+                    entry.userName === userLogin &&
                     entry.password === userPassword
             );
             if (existingEntry) {
@@ -109,8 +110,10 @@ export const checkAndLogin = async (
             } else {
                 updateProps({
                     show: true,
-                    color: "red",
+                    color: "error",
+                    icon: "$error",
                     text: "Wystąpił błąd..",
+                    color: "red",
                     title: "Dane logowania są niepoprawne.",
                 });
             }
