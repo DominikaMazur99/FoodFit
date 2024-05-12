@@ -106,7 +106,7 @@ export default {
             try {
                 if (this.validate()) {
                     await checkAndLogin(
-                        `http://localhost:3010/api/users?userName=${this.username}`,
+                        `http://localhost:3010/api/users`,
                         {},
                         this.username,
                         this.password,

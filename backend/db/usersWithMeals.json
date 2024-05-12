@@ -1,0 +1,80 @@
+{
+    "_id": {
+        "$oid": "664078de96145cf05de21f73"
+    },
+    "userName": "domi",
+    "password": "domi",
+    "caloriesDemand": 1500,
+    "meals": [
+        {
+            "date": "2024-05-12",
+            "meals": [
+                {
+                    "type": "breakfast",
+                    "date": "2024-05-12",
+                    "calories": 450,
+                    "name": "Śniadanie",
+                    "ingredients": [
+                        {
+                            "name": "jajka",
+                            "calories": 123,
+                            "gram": 50
+                        }
+                    ]
+                },
+                {
+                    "type": "second_breakfast",
+                    "date": "2024-05-12",
+                    "calories": 450,
+                    "name": "Drugie śniadanie",
+                    "ingredients": [
+                        {
+                            "name": "jajka",
+                            "calories": 123,
+                            "gram": 50
+                        }
+                    ]
+                },
+                {
+                    "type": "dinner",
+                    "date": "2024-05-12",
+                    "calories": 450,
+                    "name": "Obiad",
+                    "ingredients": [
+                        {
+                            "name": "jajka",
+                            "calories": 123,
+                            "gram": 50
+                        }
+                    ]
+                },
+                {
+                    "type": "dessert",
+                    "date": "2024-05-12",
+                    "calories": 450,
+                    "name": "Deser",
+                    "ingredients": [
+                        {
+                            "name": "jajka",
+                            "calories": 123,
+                            "gram": 50
+                        }
+                    ]
+                },
+                {
+                    "type": "supper",
+                    "date": "2024-05-12",
+                    "calories": 450,
+                    "name": "Kolacja",
+                    "ingredients": [
+                        {
+                            "name": "jajka",
+                            "calories": 123,
+                            "gram": 50
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -21,16 +21,19 @@
                     <v-list-item v-bind="props" class="list-item">
                         <div class="text">
                             <span>{{ item.name }}</span>
-                            <p>{{ data[item.value].calories }}kcl</p>
+                            <p>{{ data[item.value][0]?.calories }} kcl</p>
                         </div>
                     </v-list-item>
                 </div>
             </template>
-            <v-list-item
-                :key="item.value"
-                :title="data[item.value].name"
-                :value="data[item.value].name"
-            ></v-list-item>
+            <v-list lines="one">
+                <v-list-item
+                    v-for="item in data[item.value][0]?.ingredients"
+                    :key="item.name"
+                    :title="item.name"
+                    :subtitle="`${item.calories} kcl, ${item.gram} g`"
+                ></v-list-item>
+            </v-list>
         </v-list-group>
     </v-list>
     <reusable-modal :dialog="dialog" :closeModal="closeModal">
@@ -144,6 +147,7 @@ export default {
         },
     },
     async mounted() {
+        console.log("props", this.data);
         try {
             const userLogin = localStorage.getItem("login");
             this.user = userLogin;

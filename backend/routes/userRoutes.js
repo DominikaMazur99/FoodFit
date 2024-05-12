@@ -40,14 +40,32 @@ router.post("/", async (req, res) => {
 
 //GET
 // GET /api/products
+// router.get("/", async (req, res) => {
+//     try {
+//         const users = await User.find();
+//         res.json(users);
+//     } catch (error) {
+//         console.error("Error fetching products:", error);
+//         res.status(500).json({
+//             error: "An error occurred while fetching products",
+//         });
+//     }
+// });
+
 router.get("/", async (req, res) => {
+    const { userName } = req.query;
     try {
-        const users = await User.find();
+        let users;
+        if (userName) {
+            users = await User.findOne({ userName: userName });
+        } else {
+            users = await User.find();
+        }
         res.json(users);
     } catch (error) {
-        console.error("Error fetching products:", error);
+        console.error("Error fetching users:", error);
         res.status(500).json({
-            error: "An error occurred while fetching products",
+            error: "An error occurred while fetching users",
         });
     }
 });
