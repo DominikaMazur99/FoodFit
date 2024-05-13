@@ -87,6 +87,10 @@ export default {
             type: Object,
             required: true,
         },
+        selectedDate: {
+            type: String,
+            required: true,
+        },
     },
     components: {
         SvgIcon,
@@ -127,20 +131,53 @@ export default {
             const inputValue = event.target.value;
             this.weight = inputValue;
         },
-        addIngredientToMealsList() {
-            const calories =
-                (Number(this.weight) *
-                    Number(this.ingredientSelected.calories_on_hundred_gram)) /
-                100;
-            const meal = {
-                user: this.user,
-                name: this.ingredientSelected.label,
-                calories: calories,
-                gram: this.weight,
-                date: getTodayDate(),
-            };
-            console.log(meal, this.mealType);
-            this.productList.push(meal);
+        async addIngredientToMealsList() {
+            console.log(this.selectedDate);
+
+            try {
+                const calories =
+                    (Number(this.weight) *
+                        Number(
+                            this.ingredientSelected.calories_on_hundred_gram
+                        )) /
+                    100;
+                const date = this.selectedDate;
+                const meal = {
+                    user: this.user,
+                    name: this.ingredientSelected.label,
+                    calories: calories,
+                    gram: this.weight,
+                    date: getTodayDate(),
+                };
+                const mealToPost = {
+                    userName: this.user,
+                    date: date,
+                    meals: [
+                        {
+                            type: this.mealType,
+                            calories: calories,
+                            name: "Śniadanie",
+                            ingredients: [
+                                {
+                                    name: this.ingredientSelected.label,
+                                    calories: calories,
+                                    gram: this.weight,
+                                },
+                            ],
+                        },
+                    ],
+                };
+                const res = await fetchData(
+                    "http://localhost:3010/api/user-meals",
+                    "POST",
+                    { ...mealToPost }
+                );
+
+                console.log(res);
+                this.productList.push(meal);
+            } catch (err) {
+                console.log(err);
+            }
         },
         closeModal() {
             this.dialog = false;

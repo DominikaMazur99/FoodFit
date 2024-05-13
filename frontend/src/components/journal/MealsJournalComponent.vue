@@ -18,7 +18,10 @@
                 :value="index"
             >
                 <!-- Przekazujemy dane zgodnie z aktywnym dniem -->
-                <meals-journal-details :data="data"></meals-journal-details>
+                <meals-journal-details
+                    :data="data"
+                    :selectedDate="this.selectedDate"
+                ></meals-journal-details>
             </v-window-item>
         </v-window>
     </div>
