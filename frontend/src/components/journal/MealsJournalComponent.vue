@@ -21,6 +21,7 @@
                 <meals-journal-details
                     :data="data"
                     :selectedDate="this.selectedDate"
+                    @ingredient-added="fetchData"
                 ></meals-journal-details>
             </v-window-item>
         </v-window>
@@ -43,11 +44,11 @@ export default {
             selectedDate: null,
             tab: new Date().getDay() === 0 ? 6 : new Date().getDay() - 1,
             data: {
-                breakfast: { name: "sniad", calories: 120 },
-                second_breakfast: { name: "sec", calories: 240 },
-                dinner: { name: "obiad", calories: 350 },
-                dessert: { name: "deser", calories: 110 },
-                supper: { name: "kolacja", calories: 200 },
+                breakfast: { name: "sniad", calories: null, data: [] },
+                second_breakfast: { name: "sec", calories: null, data: [] },
+                dinner: { name: "obiad", calories: null, data: [] },
+                dessert: { name: "deser", calories: null, data: [] },
+                supper: { name: "kolacja", calories: null, data: [] },
             },
         };
     },
@@ -75,43 +76,32 @@ export default {
             try {
                 const username = localStorage.getItem("login");
                 const formattedDate = this.selectedDate;
-                console.log(formattedDate);
                 const response = await fetchData(
                     `http://localhost:3010/api/user-meals?userName=${username}&date=${formattedDate}`
                 );
 
-                const filterData = response.meals[0].meals;
+                const filterData = response.meals;
                 if (filterData) {
-                    const breakfast = filterData.filter(
-                        (item) => item.type === "breakfast"
-                    );
-                    if (breakfast) {
-                        this.data.breakfast = breakfast;
-                    }
-                    const second_breakfast = filterData.filter(
-                        (item) => item.type === "second_breakfast"
-                    );
-                    if (second_breakfast) {
-                        this.data.second_breakfast = second_breakfast;
-                    }
-                    const dinner = filterData.filter(
-                        (item) => item.type === "dinner"
-                    );
-                    if (dinner) {
-                        this.data.dinner = dinner;
-                    }
-                    const dessert = filterData.filter(
-                        (item) => item.type === "dessert"
-                    );
-                    if (dessert) {
-                        this.data.dessert = dessert;
-                    }
-                    const supper = filterData.filter(
-                        (item) => item.type === "supper"
-                    );
-                    if (supper) {
-                        this.data.supper = supper;
-                    }
+                    const mealTypes = [
+                        "breakfast",
+                        "second_breakfast",
+                        "dinner",
+                        "dessert",
+                        "supper",
+                    ];
+
+                    mealTypes.forEach((type) => {
+                        const mealsOfType = filterData.filter(
+                            (item) => item.type === type
+                        );
+                        const totalCalories = mealsOfType.reduce(
+                            (total, item) => total + item.calories,
+                            0
+                        );
+
+                        this.data[type].data = mealsOfType;
+                        this.data[type].calories = totalCalories;
+                    });
                 }
             } catch (err) {
                 console.log(err);

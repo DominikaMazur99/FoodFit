@@ -21,14 +21,21 @@
                     <v-list-item v-bind="props" class="list-item">
                         <div class="text">
                             <span>{{ item.name }}</span>
-                            <p>{{ data[item.value][0]?.calories }} kcl</p>
+                            <p>
+                                {{
+                                    data[item.value].calories
+                                        ? data[item.value].calories
+                                        : 0
+                                }}
+                                kcl
+                            </p>
                         </div>
                     </v-list-item>
                 </div>
             </template>
             <v-list lines="one">
                 <v-list-item
-                    v-for="item in data[item.value][0]?.ingredients"
+                    v-for="item in data[item.value].data"
                     :key="item.name"
                     :title="item.name"
                     :subtitle="`${item.calories} kcl, ${item.gram} g`"
@@ -52,19 +59,12 @@
             v-model="weight"
             @change="updateWeight"
         ></input-field>
-        <submit-button
-            name="Dodaj"
-            @click="addIngredientToMealsList"
-        ></submit-button>
-        <v-list lines="one">
-            <p>Dodane produkty:</p>
-            <v-list-item
-                v-for="product in productList"
-                :key="`${product.name}/${product.calories}`"
-                :title="product.name"
-                :subtitle="`${product.calories}kcal, ${product.gram}g`"
-            ></v-list-item>
-        </v-list>
+        <div :style="{ textAlign: 'center' }">
+            <submit-button
+                name="Dodaj"
+                @click="addIngredientToMealsList"
+            ></submit-button>
+        </div>
     </reusable-modal>
 </template>
 
@@ -74,8 +74,6 @@ import ReusableModal from "../../modals/ReusableModal.vue";
 import InputField from "../../inputComponents/InputField.vue";
 import ReusableSelect from "../../inputComponents/ReusableSelect.vue";
 import SubmitButton from "../../buttons/SubmitButton.vue";
-
-import { getTodayDate } from "../../../../helpers/helpersFunctions";
 
 import { mdiPlus } from "@mdi/js";
 import { ref } from "vue";
@@ -132,8 +130,6 @@ export default {
             this.weight = inputValue;
         },
         async addIngredientToMealsList() {
-            console.log(this.selectedDate);
-
             try {
                 const calories =
                     (Number(this.weight) *
@@ -142,49 +138,41 @@ export default {
                         )) /
                     100;
                 const date = this.selectedDate;
-                const meal = {
-                    user: this.user,
-                    name: this.ingredientSelected.label,
-                    calories: calories,
-                    gram: this.weight,
-                    date: getTodayDate(),
-                };
+
                 const mealToPost = {
                     userName: this.user,
+                    name: this.ingredientSelected.label,
+                    calories: calories,
+                    gram: Number(this.weight),
                     date: date,
-                    meals: [
-                        {
-                            type: this.mealType,
-                            calories: calories,
-                            name: "Śniadanie",
-                            ingredients: [
-                                {
-                                    name: this.ingredientSelected.label,
-                                    calories: calories,
-                                    gram: this.weight,
-                                },
-                            ],
-                        },
-                    ],
+                    type: this.mealType,
                 };
-                const res = await fetchData(
+
+                const response = await fetchData(
                     "http://localhost:3010/api/user-meals",
                     "POST",
-                    { ...mealToPost }
+                    mealToPost
                 );
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
 
-                console.log(res);
-                this.productList.push(meal);
+                const responseData = await response.json();
+
+                this.productList.push(responseData);
             } catch (err) {
-                console.log(err);
+                console.error("Error adding ingredient to meals list:", err);
+            } finally {
+                this.dialog = false;
+                this.$emit("ingredient-added");
             }
         },
+
         closeModal() {
             this.dialog = false;
         },
     },
     async mounted() {
-        console.log("props", this.data);
         try {
             const userLogin = localStorage.getItem("login");
             this.user = userLogin;
@@ -193,7 +181,6 @@ export default {
                 "GET",
                 {}
             );
-            console.log(response);
             this.indgredientsOptions = response;
         } catch (error) {
             console.error("Error fetching ingredients:", error);

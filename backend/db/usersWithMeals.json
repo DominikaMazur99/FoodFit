@@ -5,76 +5,35 @@
     "userName": "domi",
     "password": "domi",
     "caloriesDemand": 1500,
+    "activities": [
+        {
+            "calories": 145.83333333333334,
+            "name": "Balet (zajęcia, próba)",
+            "date": "2024-05-12",
+            "_id": "6640919c8fb9b09de7449c25"
+        }
+    ],
     "meals": [
         {
-            "date": "2024-05-12",
-            "meals": [
-                {
-                    "type": "breakfast",
-                    "date": "2024-05-12",
-                    "calories": 450,
-                    "name": "Śniadanie",
-                    "ingredients": [
-                        {
-                            "name": "jajka",
-                            "calories": 123,
-                            "gram": 50
-                        }
-                    ]
-                },
-                {
-                    "type": "second_breakfast",
-                    "date": "2024-05-12",
-                    "calories": 450,
-                    "name": "Drugie śniadanie",
-                    "ingredients": [
-                        {
-                            "name": "jajka",
-                            "calories": 123,
-                            "gram": 50
-                        }
-                    ]
-                },
-                {
-                    "type": "dinner",
-                    "date": "2024-05-12",
-                    "calories": 450,
-                    "name": "Obiad",
-                    "ingredients": [
-                        {
-                            "name": "jajka",
-                            "calories": 123,
-                            "gram": 50
-                        }
-                    ]
-                },
-                {
-                    "type": "dessert",
-                    "date": "2024-05-12",
-                    "calories": 450,
-                    "name": "Deser",
-                    "ingredients": [
-                        {
-                            "name": "jajka",
-                            "calories": 123,
-                            "gram": 50
-                        }
-                    ]
-                },
-                {
-                    "type": "supper",
-                    "date": "2024-05-12",
-                    "calories": 450,
-                    "name": "Kolacja",
-                    "ingredients": [
-                        {
-                            "name": "jajka",
-                            "calories": 123,
-                            "gram": 50
-                        }
-                    ]
-                }
-            ]
+            "date": "2024-05-13",
+            "type": "breakfast",
+            "name": "jajka",
+            "gram": 50,
+            "calories": 123
+        },
+        {
+            "date": "2024-05-13",
+            "type": "breakfast",
+            "name": "chleb",
+            "gram": 60,
+            "calories": 140
+        },
+        {
+            "date": "2024-05-13",
+            "type": "dinner",
+            "name": "wołowina",
+            "gram": 55,
+            "calories": 144
         }
     ]
 }

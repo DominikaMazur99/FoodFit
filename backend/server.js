@@ -12,6 +12,8 @@ const calculatorRoutes = require("./routes/calculatorRoutes");
 const ingredientsRoutes = require("./routes/ingredientRoutes");
 const userRoutes = require("./routes/userRoutes");
 const activitiesRoutes = require("./routes/activitiesRoutes");
+const usersActivitiesRoutes = require("./routes/usersActivitiesRoutes");
+const usersMealsRoutes = require("./routes/usersMealsRoutes");
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
@@ -22,6 +24,8 @@ app.use("/api/calculator", calculatorRoutes);
 app.use("/api/ingredients", ingredientsRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/activities", activitiesRoutes);
+app.use("/api/user-activities", usersActivitiesRoutes);
+app.use("/api/user-meals", usersMealsRoutes);
 
 // Database connection
 const CONNECTION_STRING =
