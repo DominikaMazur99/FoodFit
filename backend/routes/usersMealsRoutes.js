@@ -86,7 +86,7 @@ router.delete("/", async (req, res) => {
 
         await user.save();
 
-        res.status(204);
+        res.sendStatus(204);
     } catch (error) {
         console.error("Error delete meal:", error);
         res.status(500).json({

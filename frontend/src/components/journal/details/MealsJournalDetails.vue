@@ -201,6 +201,8 @@ export default {
             } catch (error) {
                 console.error("Error removing meal:", error);
                 // Obsługa błędu, np. wyświetlenie komunikatu użytkownikowi
+            } finally {
+                this.$emit("ingredient-added");
             }
         },
 
