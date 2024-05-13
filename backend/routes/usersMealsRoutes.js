@@ -68,4 +68,31 @@ router.post("/", async (req, res) => {
     }
 });
 
+router.delete("/", async (req, res) => {
+    const { userName, mealId } = req.body;
+
+    try {
+        const user = await User.findOne({ userName });
+
+        if (!user) {
+            res.status(404).json({ data: "uztykownik nie istnieje" });
+        }
+
+        const mealObjectIdToRemove = ObjectId.createFromHexString(mealId);
+
+        user.meals = user.meals.filter(
+            (meal) => !meal._id.equals(mealObjectIdToRemove)
+        );
+
+        await user.save();
+
+        res.status(204);
+    } catch (error) {
+        console.error("Error delete meal:", error);
+        res.status(500).json({
+            error: "An error occurred while fetching meal",
+        });
+    }
+});
+
 module.exports = router;

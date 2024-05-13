@@ -34,12 +34,28 @@
                 </div>
             </template>
             <v-list lines="one">
-                <v-list-item
+                <div
+                    class="item-wrapper"
                     v-for="item in data[item.value].data"
-                    :key="item.name"
-                    :title="item.name"
-                    :subtitle="`${item.calories} kcl, ${item.gram} g`"
-                ></v-list-item>
+                    :key="item._id"
+                >
+                    <div class="meal-text">
+                        <span :style="{ color: '#2f7d28' }">{{
+                            item.name
+                        }}</span>
+                        <span :style="{ color: 'gray' }"
+                            >{{ item.calories }} kcl, {{ item.gram }} g</span
+                        >
+                    </div>
+                    <button class="icon-button" @click="removeMeal(item._id)">
+                        <svg-icon
+                            type="mdi"
+                            :path="pathToRemove"
+                            class="icon"
+                            color="red"
+                        ></svg-icon>
+                    </button>
+                </div>
             </v-list>
         </v-list-group>
     </v-list>
@@ -75,7 +91,7 @@ import InputField from "../../inputComponents/InputField.vue";
 import ReusableSelect from "../../inputComponents/ReusableSelect.vue";
 import SubmitButton from "../../buttons/SubmitButton.vue";
 
-import { mdiPlus } from "@mdi/js";
+import { mdiPlus, mdiClose } from "@mdi/js";
 import { ref } from "vue";
 import { fetchData } from "../../../../helpers/api";
 
@@ -107,6 +123,7 @@ export default {
                 { value: "supper", name: "Kolacja" },
             ],
             path: mdiPlus,
+            pathToRemove: mdiClose,
             dialog: false,
             indgredientsOptions: [],
             ingredientSelected: ref(""),
@@ -165,6 +182,25 @@ export default {
             } finally {
                 this.dialog = false;
                 this.$emit("ingredient-added");
+            }
+        },
+        async removeMeal(id) {
+            try {
+                const response = await fetchData(
+                    "http://localhost:3010/api/user-meals",
+                    "DELETE",
+                    {
+                        userName: this.user,
+                        mealId: id,
+                    }
+                );
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+            } catch (error) {
+                console.error("Error removing meal:", error);
+                // Obsługa błędu, np. wyświetlenie komunikatu użytkownikowi
             }
         },
 
@@ -234,5 +270,16 @@ export default {
 .icon-button:hover {
     scale: 1.1;
     cursor: pointer;
+}
+.item-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px;
+}
+
+.meal-text {
+    display: flex;
+    flex-direction: column;
 }
 </style>
