@@ -11,32 +11,37 @@
                 <menu-btn name="Zapotrzebowanie kaloryczne"></menu-btn>
             </router-link>
 
-            <menu-btn name="Postępy"></menu-btn>
+            <router-link to="/postepy">
+                <menu-btn name="Postępy"></menu-btn
+            ></router-link>
 
-            <menu-btn name="Wyloguj" @click="logout"></menu-btn>
+            <menu-btn
+                name="Wyloguj"
+                @click="logout"
+            ></menu-btn>
         </div>
     </div>
 </template>
 
 <script>
-import AppNameText from "../textComponents/AppNameText.vue";
-import MenuButton from "../buttons/MenuButton.vue";
+import AppNameText from '../textComponents/AppNameText.vue';
+import MenuButton from '../buttons/MenuButton.vue';
 export default {
     components: {
-        "app-name": AppNameText,
-        "menu-btn": MenuButton,
+        'app-name': AppNameText,
+        'menu-btn': MenuButton,
     },
     methods: {
         logout() {
             localStorage.clear();
-            this.$router.push("/");
+            this.$router.push('/');
         },
     },
 };
 </script>
 
 <style>
-@import "../styles/common-style.css";
+@import '../styles/common-style.css';
 .app-name-menu {
     align-self: center;
     margin-bottom: 10px;
