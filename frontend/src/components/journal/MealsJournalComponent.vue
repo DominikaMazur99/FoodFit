@@ -1,26 +1,35 @@
 <template>
     <div :style="{ marginTop: '1rem' }">
-        <v-tabs v-model="tab" hide-slider @click="updateSelectedDate">
-            <v-tab
-                v-for="(day, index) in days"
-                :key="index"
-                :value="index"
-                :class="{ active: index === selectedDay }"
-                @click="changeDay(index)"
-            >
-                {{ day }}
-            </v-tab>
-        </v-tabs>
+        <date-navigation :currentWeekRange="currentWeekRange" :previousWeek="previousWeek" :nextWeek="nextWeek" >
+
+        </date-navigation>
+        <v-tooltip
+            v-for="(day, index) in daysListWithDate"
+            :key="index"
+            :text="day.dateToDisplay"
+            location="top"
+            :styles="{ top: '5px' }"
+        >
+            <template v-slot:activator="{ props }">
+                <v-tab
+                    v-bind="props"
+                    @click="setSelectedDate(day.date, index)"
+                    :class="{ active: index === tab }"
+                >
+                    {{ day.day }}
+                </v-tab>
+            </template>
+        </v-tooltip>
         <v-window v-model="tab">
             <v-window-item
-                v-for="(day, index) in days"
+                v-for="(day, index) in daysListWithDate"
                 :key="index"
                 :value="index"
             >
                 <!-- Przekazujemy dane zgodnie z aktywnym dniem -->
                 <meals-journal-details
                     :data="data"
-                    :selectedDate="this.selectedDate"
+                    :selectedDate="selectedDate"
                     @ingredient-added="fetchData"
                 ></meals-journal-details>
             </v-window-item>
@@ -29,26 +38,31 @@
 </template>
 
 <script>
-import { fetchData } from "../../../helpers/api.js";
-import MealsJournalDetails from "./details/MealsJournalDetails.vue";
+import { startOfWeek, endOfWeek, format, addDays } from "date-fns";
+import { fetchData } from '../../../helpers/api.js';
+import MealsJournalDetails from './details/MealsJournalDetails.vue';
+import DateNavigation from "./details/DateNavigation.vue"
 
 export default {
     components: {
-        "meals-journal-details": MealsJournalDetails,
+        'meals-journal-details': MealsJournalDetails,
+        "date-navigation": DateNavigation
     },
     data() {
         return {
-            days: ["Pon", "Wt", "Śr", "Cz", "Pt", "So", "Nd"],
+            daysListWithDate: [],
             currentDay: new Date().getDay() === 0 ? 6 : new Date().getDay() - 1,
-            selectedDay: null,
+            selectedDay: new Date(),
             selectedDate: null,
+            currentDate: new Date(),
+            currentWeekRange: { weekStart: null, weekEnd: null },
             tab: new Date().getDay() === 0 ? 6 : new Date().getDay() - 1,
             data: {
-                breakfast: { name: "sniad", calories: null, data: [] },
-                second_breakfast: { name: "sec", calories: null, data: [] },
-                dinner: { name: "obiad", calories: null, data: [] },
-                dessert: { name: "deser", calories: null, data: [] },
-                supper: { name: "kolacja", calories: null, data: [] },
+                breakfast: { name: 'sniad', calories: null, data: [] },
+                second_breakfast: { name: 'sec', calories: null, data: [] },
+                dinner: { name: 'obiad', calories: null, data: [] },
+                dessert: { name: 'deser', calories: null, data: [] },
+                supper: { name: 'kolacja', calories: null, data: [] },
             },
         };
     },
@@ -63,18 +77,70 @@ export default {
                 console.log(err);
             }
         },
+        previousWeek() {
+            const date = new Date(this.selectedDay);
+
+            date.setDate(date.getDate() - 7);
+            this.selectedDay = format(new Date(date), "yyyy-MM-dd");
+            this.generateDaysList();
+            this.generateWeekRange();
+        },
+        nextWeek() {
+            const date = new Date(this.selectedDay);
+
+            date.setDate(date.getDate() + 7);
+            this.selectedDay = format(new Date(date), "yyyy-MM-dd");
+            this.generateDaysList();
+            this.generateWeekRange();
+        },
         updateSelectedDate() {
             const today = new Date();
             const currentDay = today.getDay() === 0 ? 6 : today.getDay() - 1;
             const diff = this.selectedDay - currentDay;
             const newDate = new Date(today);
             newDate.setDate(today.getDate() + diff);
-            this.selectedDate = newDate.toISOString().split("T")[0]; // Ustawienie selectedDate
+            this.selectedDate = newDate.toISOString().split('T')[0]; // Ustawienie selectedDate
             this.fetchData(); // Fetch danych przy każdej zmianie daty
+        },
+        generateDaysList() {
+            const days = ['Pon', 'Wt', 'Śr', 'Cz', 'Pt', 'So', 'Nd'];
+            const startDate = new Date(this.selectedDay);
+            const currentWeekStart = startOfWeek(startDate, {
+                weekStartsOn: 1,
+            });
+            const currentWeekEnd = endOfWeek(startDate);
+
+            this.daysListWithDate = [];
+            for (let i = 0; i < 7; i++) {
+                const day = addDays(currentWeekStart, i);
+                const formattedDay = format(day, 'yyyy-MM-dd');
+                this.daysListWithDate.push({
+                    day: days[i],
+                    date: formattedDay,
+                    dateToDisplay: format(day, 'dd-MM'),
+                });
+            }
+        },
+        generateWeekRange() {
+            const startDate = new Date(this.selectedDay);
+            const currentWeekStart = startOfWeek(startDate, {
+                weekStartsOn: 1,
+            });
+            const currentWeekEnd = endOfWeek(startDate, { weekStartsOn: 1 });
+            this.currentWeekRange = {
+                weekStart: format(currentWeekStart, 'yyyy-MM-dd'),
+                weekEnd: format(currentWeekEnd, 'yyyy-MM-dd'),
+            };
+        },
+        setSelectedDate(date, index) {
+            this.tab = index;
+            this.selectedDay = format(new Date(date), 'yyyy-MM-dd');
+            this.selectedDate = this.selectedDay;
+            this.fetchData();
         },
         async fetchData() {
             try {
-                const username = localStorage.getItem("login");
+                const username = localStorage.getItem('login');
                 const formattedDate = this.selectedDate;
                 const response = await fetchData(
                     `http://localhost:3010/api/user-meals?userName=${username}&date=${formattedDate}`
@@ -83,11 +149,11 @@ export default {
                 const filterData = response.meals;
                 if (filterData) {
                     const mealTypes = [
-                        "breakfast",
-                        "second_breakfast",
-                        "dinner",
-                        "dessert",
-                        "supper",
+                        'breakfast',
+                        'second_breakfast',
+                        'dinner',
+                        'dessert',
+                        'supper',
                     ];
 
                     mealTypes.forEach((type) => {
@@ -109,19 +175,22 @@ export default {
         },
     },
     mounted() {
-        this.selectedDay = this.currentDay;
-        this.updateSelectedDate(); // Aktualizujemy selectedDate przy ładowaniu komponentu
+        this.generateDaysList();
+        this.generateWeekRange();
+        this.selectedDay = format(this.currentDate, 'yyyy-MM-dd');
+        this.selectedDate = this.selectedDay;
+        this.fetchData();
     },
     watch: {
         tab(newTab) {
-            this.updateSelectedDate(); // Aktualizujemy selectedDate przy zmianie zakładki
+            this.selectedDay;
         },
     },
 };
 </script>
 
 <style scoped>
-@import "../styles/common-style.css";
+@import '../styles/common-style.css';
 
 /* te klasy to są klasy z komponentów z vuetify, potrzebowalam dostosowac je do naszego projektu */
 .v-tab.v-tab.v-btn {

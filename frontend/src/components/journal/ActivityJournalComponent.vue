@@ -1,19 +1,6 @@
 <template>
     <div :style="{ marginTop: '1rem' }">
-        <div class="week-range">
-            <v-btn icon @click="previousWeek" class="btn">
-                <div>&lt;&lt;</div>
-            </v-btn>
-
-            <span
-                >{{ currentWeekRange.weekStart }} -
-                {{ currentWeekRange.weekEnd }}</span
-            >
-            <v-btn icon @click="nextWeek" class="btn">
-                <div>>></div>
-            </v-btn>
-        </div>
-
+        <date-navigation :currentWeekRange="currentWeekRange" :previousWeek="previousWeek" :nextWeek="nextWeek" ></date-navigation>
         <v-tooltip
             v-for="(day, index) in daysListToActivity"
             :key="index"
@@ -51,6 +38,7 @@
 <script>
 import ActivityJournalDetails from "./details/ActivityJournalDetails.vue";
 import SvgIcon from "@jamescoyle/vue-icon";
+import DateNavigation from "./details/DateNavigation.vue";
 import { mdiPlus } from "@mdi/js";
 import { fetchData } from "../../../helpers/api";
 import { startOfWeek, endOfWeek, format, addDays } from "date-fns";
@@ -58,6 +46,7 @@ import { startOfWeek, endOfWeek, format, addDays } from "date-fns";
 export default {
     components: {
         "activity-journal-details": ActivityJournalDetails,
+        "date-navigation": DateNavigation,
         SvgIcon,
     },
 
@@ -216,13 +205,5 @@ export default {
     background-color: rgba(47, 125, 40, 0.5);
     color: white !important;
 }
-.week-range {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    font-size: 18px;
-    font-family: "Jost";
-    margin-bottom: 5px;
-}
+
 </style>
