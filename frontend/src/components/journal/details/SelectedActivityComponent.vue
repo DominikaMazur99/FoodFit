@@ -9,14 +9,30 @@
                 class="remove-button"
                 @click="removeActivity(selectedActivity._id)"
             >
-                X
+                <svg-icon
+                    type="mdi"
+                    :path="pathToRemove"
+                    class="icon"
+                    color="red"
+                ></svg-icon>
             </button>
         </div>
     </v-list-item>
 </template>
 
 <script>
+import SvgIcon from '@jamescoyle/vue-icon';
+import { mdiClose } from '@mdi/js';
+
 export default {
+    components: {
+        SvgIcon,
+    },
+    data() {
+        return {
+            pathToRemove: mdiClose,
+        };
+    },
     props: {
         selectedActivity: {
             type: Object,
@@ -49,7 +65,9 @@ export default {
     display: flex;
     justify-content: space-between;
 }
-.remove-button {
-    color: red;
+
+.remove-button:hover {
+    scale: 1.1;
+    cursor: pointer;
 }
 </style>
