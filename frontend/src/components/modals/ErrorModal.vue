@@ -56,7 +56,6 @@ export default {
     width: 100%;
     height: 100%;
     z-index: 999;
-    backdrop-filter: blur(8px);
     border-radius: 10px;
 }
 .error-message-container {
@@ -69,7 +68,7 @@ export default {
     border-radius: 10px;
     z-index: 1000;
     min-width: 300px;
-    border: 3px solid #e29696;
+    border: 3px solid #f4bbbb;
 }
 .error-close-button {
     position: absolute;
