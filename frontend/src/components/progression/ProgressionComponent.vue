@@ -1,40 +1,24 @@
 <template>
     <div class="common-box">
+        <div class="app-name">
+            <app-name></app-name>
+        </div>
+        <hr />
         <div class="month-navigation">
-            <v-btn
-                icon
-                class="no-border"
-                @click="previousMonth"
-            >
-                <svg-icon
-                    type="mdi"
-                    :path="pathToBack"
-                    color="gray"
-                ></svg-icon>
+            <v-btn icon class="no-border" @click="previousMonth">
+                <svg-icon type="mdi" :path="pathToBack" color="gray"></svg-icon>
             </v-btn>
             <span :style="{ 'font-size': '20px' }">{{ currentMonthName }}</span>
-            <v-btn
-                icon
-                class="no-border"
-                @click="nextMonth"
-            >
-                <svg-icon
-                    type="mdi"
-                    :path="pathToNext"
-                    color="gray"
-                ></svg-icon>
+            <v-btn icon class="no-border" @click="nextMonth">
+                <svg-icon type="mdi" :path="pathToNext" color="gray"></svg-icon>
             </v-btn>
         </div>
-        <Bar
-            id="my-chart-id"
-            :data="chartData"
-            :options="chartOptions"
-        />
+        <Bar id="my-chart-id" :data="chartData" :options="chartOptions" />
     </div>
 </template>
 
 <script>
-import { Bar } from 'vue-chartjs';
+import { Bar } from "vue-chartjs";
 import {
     Chart as ChartJS,
     Title,
@@ -43,9 +27,10 @@ import {
     BarElement,
     CategoryScale,
     LinearScale,
-} from 'chart.js';
-import SvgIcon from '@jamescoyle/vue-icon';
-import { mdiChevronRight, mdiChevronLeft } from '@mdi/js';
+} from "chart.js";
+import SvgIcon from "@jamescoyle/vue-icon";
+import { mdiChevronRight, mdiChevronLeft } from "@mdi/js";
+import AppNameText from "../textComponents/AppNameText.vue";
 
 ChartJS.register(
     Title,
@@ -57,10 +42,11 @@ ChartJS.register(
 );
 
 export default {
-    name: 'BarChart',
+    name: "BarChart",
     components: {
         Bar,
         SvgIcon,
+        "app-name": AppNameText,
     },
     data() {
         return {
@@ -95,10 +81,10 @@ export default {
                 labels: Array.from({ length: daysInMonth }, (_, i) => i + 1),
                 datasets: [
                     {
-                        label: 'Spalone kalorie w ciągu dnia',
+                        label: "Spalone kalorie w ciągu dnia",
                         data: dailyCalories,
-                        backgroundColor: '#2f7d28',
-                        borderColor: '#2f7d28',
+                        backgroundColor: "#2f7d28",
+                        borderColor: "#2f7d28",
                         borderWidth: 1,
                     },
                 ],
@@ -115,66 +101,65 @@ export default {
                         max: 1000,
                         title: {
                             display: true,
-                            text: 'Liczba spalonych kalorii', // opis osi y
+                            text: "Liczba spalonych kalorii", // opis osi y
                             font: {
-                                weight: 'italic',
-                                size: '15px',
-                                color: 'gray'
+                                weight: "italic",
+                                size: "15px",
+                                color: "gray",
                             },
                         },
                     },
                     x: {
-                      title: {
+                        title: {
                             display: true,
-                            text: 'Dzień', // opis osi x
+                            text: "Dzień", // opis osi x
                             font: {
-                                weight: 'italic',
-                                size: '15px',
-                                color: 'gray'
-
+                                weight: "italic",
+                                size: "15px",
+                                color: "gray",
                             },
                         },
-                    }
+                    },
                 },
             };
         },
         currentMonthName() {
             const monthNames = [
-                'Styczeń',
-                'Luty',
-                'Marzec',
-                'Kwiecień',
-                'Maj',
-                'Czerwiec',
-                'Lipiec',
-                'Sierpień',
-                'Wrzesień',
-                'Październik',
-                'Listopad',
-                'Grudzień',
+                "Styczeń",
+                "Luty",
+                "Marzec",
+                "Kwiecień",
+                "Maj",
+                "Czerwiec",
+                "Lipiec",
+                "Sierpień",
+                "Wrzesień",
+                "Październik",
+                "Listopad",
+                "Grudzień",
             ];
             return monthNames[this.currentMonth];
         },
     },
     methods: {
         async fetchActivities() {
-            const user = localStorage.getItem('login');
+            const user = localStorage.getItem("login");
             try {
                 const response = await fetch(
                     `http://localhost:3010/api/user-activities?userName=${user}`
                 );
                 const data = await response.json();
-                console.log('User activities:', data);
+                console.log("User activities:", data);
 
                 if (!data.activities || !Array.isArray(data.activities)) {
-                    console.error('Invalid activities data:', data.activities);
+                    console.error("Invalid activities data:", data.activities);
                     return;
                 }
 
                 this.activities = data.activities;
-                console.log('Chart data:', this.chartData.datasets[0].data);
+                console.log("Chart data:", this.chartData.datasets[0].data);
             } catch (error) {
-                console.error('Error fetching activities:', error);
+                console.error("Error fetching activities:", error);
             }
         },
         previousMonth() {
@@ -221,14 +206,17 @@ export default {
     justify-content: center; /* Wyśrodkowanie elementów w poziomie */
     opacity: 0.85;
 }
-
+.app-name {
+    align-self: flex-start; /* Align the app-name to the start (left) of the flex container */
+    margin-bottom: 20px; /* Add some bottom margin for spacing */
+}
 .month-navigation {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 8px;
     font-size: 18px;
-    font-family: 'Jost';
+    font-family: "Jost";
     margin-bottom: 5px;
     color: gray;
     font-style: italic;

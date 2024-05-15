@@ -1,11 +1,14 @@
 <template>
-    <div class="app-name">
-        <div class="first-part">Food</div>
-        <div class="second-part">Fit</div>
-    </div>
+    <router-link to="/menu" class="router-link">
+        <div class="app-name">
+            <div class="first-part">Food</div>
+            <div class="second-part">Fit</div>
+        </div>
+    </router-link>
 </template>
 
 <script>
+//TODO: router-link ma działać jeśli użytkownik jest zalogowany
 export default {};
 </script>
 
@@ -20,5 +23,10 @@ export default {};
 }
 .second-part {
     font-weight: lighter;
+}
+.router-link {
+    text-decoration: none; /* Usuwa podkreślenie */
+    color: inherit; /* Dziedziczy kolor tekstu */
+    font-weight: inherit; /* Dziedziczy grubość czcionki */
 }
 </style>
