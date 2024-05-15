@@ -1,7 +1,10 @@
 <template>
     <div :style="{ marginTop: '1rem' }">
-        <date-navigation :currentWeekRange="currentWeekRange" :previousWeek="previousWeek" :nextWeek="nextWeek" >
-
+        <date-navigation
+            :currentWeekRange="currentWeekRange"
+            :previousWeek="previousWeek"
+            :nextWeek="nextWeek"
+        >
         </date-navigation>
         <v-tooltip
             v-for="(day, index) in daysListWithDate"
@@ -39,14 +42,14 @@
 
 <script>
 import { startOfWeek, endOfWeek, format, addDays } from "date-fns";
-import { fetchData } from '../../../helpers/api.js';
-import MealsJournalDetails from './details/MealsJournalDetails.vue';
-import DateNavigation from "./details/DateNavigation.vue"
+import { fetchData } from "../../../helpers/api.js";
+import MealsJournalDetails from "./details/MealsJournalDetails.vue";
+import DateNavigation from "./details/DateNavigation.vue";
 
 export default {
     components: {
-        'meals-journal-details': MealsJournalDetails,
-        "date-navigation": DateNavigation
+        "meals-journal-details": MealsJournalDetails,
+        "date-navigation": DateNavigation,
     },
     data() {
         return {
@@ -58,11 +61,11 @@ export default {
             currentWeekRange: { weekStart: null, weekEnd: null },
             tab: new Date().getDay() === 0 ? 6 : new Date().getDay() - 1,
             data: {
-                breakfast: { name: 'sniad', calories: null, data: [] },
-                second_breakfast: { name: 'sec', calories: null, data: [] },
-                dinner: { name: 'obiad', calories: null, data: [] },
-                dessert: { name: 'deser', calories: null, data: [] },
-                supper: { name: 'kolacja', calories: null, data: [] },
+                breakfast: { name: "sniad", calories: null, data: [] },
+                second_breakfast: { name: "sec", calories: null, data: [] },
+                dinner: { name: "obiad", calories: null, data: [] },
+                dessert: { name: "deser", calories: null, data: [] },
+                supper: { name: "kolacja", calories: null, data: [] },
             },
         };
     },
@@ -90,6 +93,7 @@ export default {
 
             date.setDate(date.getDate() + 7);
             this.selectedDay = format(new Date(date), "yyyy-MM-dd");
+            console.log(this.selectedDay);
             this.generateDaysList();
             this.generateWeekRange();
         },
@@ -99,11 +103,11 @@ export default {
             const diff = this.selectedDay - currentDay;
             const newDate = new Date(today);
             newDate.setDate(today.getDate() + diff);
-            this.selectedDate = newDate.toISOString().split('T')[0]; // Ustawienie selectedDate
+            this.selectedDate = newDate.toISOString().split("T")[0]; // Ustawienie selectedDate
             this.fetchData(); // Fetch danych przy każdej zmianie daty
         },
         generateDaysList() {
-            const days = ['Pon', 'Wt', 'Śr', 'Cz', 'Pt', 'So', 'Nd'];
+            const days = ["Pon", "Wt", "Śr", "Cz", "Pt", "So", "Nd"];
             const startDate = new Date(this.selectedDay);
             const currentWeekStart = startOfWeek(startDate, {
                 weekStartsOn: 1,
@@ -113,11 +117,11 @@ export default {
             this.daysListWithDate = [];
             for (let i = 0; i < 7; i++) {
                 const day = addDays(currentWeekStart, i);
-                const formattedDay = format(day, 'yyyy-MM-dd');
+                const formattedDay = format(day, "yyyy-MM-dd");
                 this.daysListWithDate.push({
                     day: days[i],
                     date: formattedDay,
-                    dateToDisplay: format(day, 'dd-MM'),
+                    dateToDisplay: format(day, "dd-MM"),
                 });
             }
         },
@@ -128,19 +132,19 @@ export default {
             });
             const currentWeekEnd = endOfWeek(startDate, { weekStartsOn: 1 });
             this.currentWeekRange = {
-                weekStart: format(currentWeekStart, 'yyyy-MM-dd'),
-                weekEnd: format(currentWeekEnd, 'yyyy-MM-dd'),
+                weekStart: format(currentWeekStart, "yyyy-MM-dd"),
+                weekEnd: format(currentWeekEnd, "yyyy-MM-dd"),
             };
         },
         setSelectedDate(date, index) {
             this.tab = index;
-            this.selectedDay = format(new Date(date), 'yyyy-MM-dd');
+            this.selectedDay = format(new Date(date), "yyyy-MM-dd");
             this.selectedDate = this.selectedDay;
             this.fetchData();
         },
         async fetchData() {
             try {
-                const username = localStorage.getItem('login');
+                const username = localStorage.getItem("login");
                 const formattedDate = this.selectedDate;
                 const response = await fetchData(
                     `http://localhost:3010/api/user-meals?userName=${username}&date=${formattedDate}`
@@ -149,11 +153,11 @@ export default {
                 const filterData = response.meals;
                 if (filterData) {
                     const mealTypes = [
-                        'breakfast',
-                        'second_breakfast',
-                        'dinner',
-                        'dessert',
-                        'supper',
+                        "breakfast",
+                        "second_breakfast",
+                        "dinner",
+                        "dessert",
+                        "supper",
                     ];
 
                     mealTypes.forEach((type) => {
@@ -177,7 +181,7 @@ export default {
     mounted() {
         this.generateDaysList();
         this.generateWeekRange();
-        this.selectedDay = format(this.currentDate, 'yyyy-MM-dd');
+        this.selectedDay = format(this.currentDate, "yyyy-MM-dd");
         this.selectedDate = this.selectedDay;
         this.fetchData();
     },
@@ -185,12 +189,16 @@ export default {
         tab(newTab) {
             this.selectedDay;
         },
+        selectedDay(newSelectedDay) {
+            this.selectedDate = format(new Date(newSelectedDay), "yyyy-MM-dd");
+            this.fetchData();
+        },
     },
 };
 </script>
 
 <style scoped>
-@import '../styles/common-style.css';
+@import "../styles/common-style.css";
 
 /* te klasy to są klasy z komponentów z vuetify, potrzebowalam dostosowac je do naszego projektu */
 .v-tab.v-tab.v-btn {
