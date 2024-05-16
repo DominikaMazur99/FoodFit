@@ -113,6 +113,7 @@ export default {
         "input-field": InputField,
         "submit-button": SubmitButton,
     },
+    emits: ["ingredientAdded"], // Deklaracja zdarzenia
     data() {
         return {
             open: [
@@ -178,7 +179,7 @@ export default {
                 console.error("Error adding ingredient to meals list:", err);
             } finally {
                 this.dialog = false;
-                this.$emit("ingredient-added");
+                this.$emit("ingredientAdded");
             }
         },
         async removeMeal(id) {
@@ -199,7 +200,7 @@ export default {
                 console.error("Error removing meal:", error);
                 // Obsługa błędu, np. wyświetlenie komunikatu użytkownikowi
             } finally {
-                this.$emit("ingredient-added");
+                this.$emit("ingredientAdded");
             }
         },
 
@@ -224,6 +225,64 @@ export default {
     },
 };
 </script>
+
+<style scoped>
+.list-item {
+    padding: 0;
+}
+
+.icon-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.icon-button {
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.icon {
+    margin-right: 8px;
+}
+
+.text {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.text p {
+    margin-left: 8px;
+    justify-self: flex-end;
+    color: grey;
+    font-style: italic;
+}
+
+.v-list-item {
+    color: #2f7d28;
+}
+.v-list-item--variant-text .v-list-item__overlay {
+    color: grey;
+}
+
+.icon-button:hover {
+    scale: 1.1;
+    cursor: pointer;
+}
+.item-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px;
+}
+
+.meal-text {
+    display: flex;
+    flex-direction: column;
+}
+</style>
 
 <style scoped>
 .list-item {

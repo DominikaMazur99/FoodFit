@@ -57,7 +57,6 @@
 import ActivityJournalDetails from "./details/ActivityJournalDetails.vue";
 import SvgIcon from "@jamescoyle/vue-icon";
 import DateNavigation from "./details/DateNavigation.vue";
-import { mdiPlus } from "@mdi/js";
 import { startOfWeek, endOfWeek, format, addDays } from "date-fns";
 import { inject } from "vue";
 

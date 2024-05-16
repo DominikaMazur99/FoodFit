@@ -71,6 +71,10 @@ export const checkAndRegister = async (
                     title: "Udało się.",
                     text: "Użytkownik został zarejestrowany.",
                 });
+
+                setTimeout(() => {
+                    window.location.href = "/";
+                }, 1500);
             }
         } else {
             throw new Error(`Error ${response.status}: ${response.statusText}`);
