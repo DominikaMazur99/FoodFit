@@ -15,33 +15,36 @@
                 <menu-btn name="Postępy"></menu-btn
             ></router-link>
 
-            <menu-btn
-                name="Wyloguj"
-                @click="logout"
-            ></menu-btn>
+            <menu-btn name="Wyloguj" @click="logout"></menu-btn>
         </div>
     </div>
 </template>
 
 <script>
-import AppNameText from '../textComponents/AppNameText.vue';
-import MenuButton from '../buttons/MenuButton.vue';
+import AppNameText from "../textComponents/AppNameText.vue";
+import MenuButton from "../buttons/MenuButton.vue";
+import { inject } from "vue";
 export default {
+    setup() {
+        const useUserActivitiesStore = inject("userActivitiesStore");
+        return { useUserActivitiesStore };
+    },
     components: {
-        'app-name': AppNameText,
-        'menu-btn': MenuButton,
+        "app-name": AppNameText,
+        "menu-btn": MenuButton,
     },
     methods: {
         logout() {
             localStorage.clear();
-            this.$router.push('/');
+            this.$router.push("/");
+            this.useUserActivitiesStore.clearStore();
         },
     },
 };
 </script>
 
 <style>
-@import '../styles/common-style.css';
+@import "../styles/common-style.css";
 .app-name-menu {
     align-self: center;
     margin-bottom: 10px;

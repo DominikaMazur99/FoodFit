@@ -37,6 +37,22 @@
                 ></meals-journal-details>
             </v-window-item>
         </v-window>
+        <div class="totalCalories">
+            <div class="totalCaloriesValue">
+                {{ this.totalCalories }} / {{ this.caloricDemand }} kcal
+                <div class="additional_calories">
+                    {{
+                        this.useUserActivitiesStore.caloriesBurned[
+                            this.selectedDay
+                        ]
+                            ? ` ( +${this.useUserActivitiesStore.caloriesBurned[
+                                  this.selectedDay
+                              ].toFixed(2)} kcal )`
+                            : ""
+                    }}
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -45,11 +61,17 @@ import { startOfWeek, endOfWeek, format, addDays } from "date-fns";
 import { fetchData } from "../../../helpers/api.js";
 import MealsJournalDetails from "./details/MealsJournalDetails.vue";
 import DateNavigation from "./details/DateNavigation.vue";
+import { ref, inject } from "vue";
 
 export default {
     components: {
         "meals-journal-details": MealsJournalDetails,
         "date-navigation": DateNavigation,
+    },
+    setup() {
+        const useUserActivitiesStore = inject("userActivitiesStore"); //pobranie kontekstu
+        useUserActivitiesStore.fetchActivites(); // uycie funkcji z kontekstu
+        return { useUserActivitiesStore };
     },
     data() {
         return {
@@ -67,6 +89,9 @@ export default {
                 dessert: { name: "deser", calories: null, data: [] },
                 supper: { name: "kolacja", calories: null, data: [] },
             },
+            totalCalories: ref(0),
+            caloricDemand: ref(0),
+            userName: localStorage.getItem("login"),
         };
     },
     methods: {
@@ -142,12 +167,23 @@ export default {
             this.selectedDate = this.selectedDay;
             this.fetchData();
         },
+        async fetchCaloricDemand() {
+            console.log("fetchCaloricDemand");
+            try {
+                const { caloricDemand } = await fetchData(
+                    `http://localhost:3010/api/users/${this.userName}/caloricDemand`
+                );
+
+                this.caloricDemand = caloricDemand;
+            } catch (err) {
+                console.error(err);
+            }
+        },
         async fetchData() {
             try {
-                const username = localStorage.getItem("login");
                 const formattedDate = this.selectedDate;
                 const response = await fetchData(
-                    `http://localhost:3010/api/user-meals?userName=${username}&date=${formattedDate}`
+                    `http://localhost:3010/api/user-meals?userName=${this.userName}&date=${formattedDate}`
                 );
 
                 const filterData = response.meals;
@@ -159,6 +195,7 @@ export default {
                         "dessert",
                         "supper",
                     ];
+                    this.totalCalories = 0;
 
                     mealTypes.forEach((type) => {
                         const mealsOfType = filterData.filter(
@@ -171,8 +208,11 @@ export default {
 
                         this.data[type].data = mealsOfType;
                         this.data[type].calories = totalCalories;
+                        this.totalCalories += this.data[type].calories;
                     });
                 }
+
+                this.useUserActivitiesStore.fetchActivites(this.selectedDate);
             } catch (err) {
                 console.log(err);
             }
@@ -184,6 +224,8 @@ export default {
         this.selectedDay = format(this.currentDate, "yyyy-MM-dd");
         this.selectedDate = this.selectedDay;
         this.fetchData();
+        this.fetchCaloricDemand();
+        this.useUserActivitiesStore.fetchActivites(this.selectedDate);
     },
     watch: {
         tab(newTab) {
@@ -214,5 +256,24 @@ export default {
     text-decoration: none !important;
     background-color: rgba(47, 125, 40, 0.5);
     color: white !important;
+}
+.totalCalories {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    color: #2f7d28;
+}
+.totalCaloriesValue {
+    /* font-weight: bold; */
+    font-size: 20px;
+    font-weight: 350;
+}
+.additional_calories {
+    font-weight: 300;
+    color: grey;
+    font-size: smaller;
+}
+.totalCaloriesValue {
+    gap: 20px;
 }
 </style>

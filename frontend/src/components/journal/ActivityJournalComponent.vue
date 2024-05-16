@@ -1,6 +1,10 @@
 <template>
     <div :style="{ marginTop: '1rem' }">
-        <date-navigation :currentWeekRange="currentWeekRange" :previousWeek="previousWeek" :nextWeek="nextWeek" ></date-navigation>
+        <date-navigation
+            :currentWeekRange="currentWeekRange"
+            :previousWeek="previousWeek"
+            :nextWeek="nextWeek"
+        ></date-navigation>
         <v-tooltip
             v-for="(day, index) in daysListToActivity"
             :key="index"
@@ -26,12 +30,26 @@
                 :value="index"
             >
                 <activity-journal-details
-                    :selectedActivities="this.selectedActivities"
+                    :selectedActivities="
+                        this.useUserActivitiesStore.getActivities(
+                            this.selectedDay
+                        )
+                    "
                     :addActivity="this.addActivity"
                     :removeActivity="this.removeActivity"
                 ></activity-journal-details>
             </v-window-item>
         </v-window>
+        <div class="burnedCalories">
+            <div>Spalone kalorie</div>
+            <div class="burnedCaloriesValue">
+                {{
+                    this.useUserActivitiesStore.caloriesBurned[
+                        this?.selectedDay
+                    ]
+                }}
+            </div>
+        </div>
     </div>
 </template>
 
@@ -40,10 +58,15 @@ import ActivityJournalDetails from "./details/ActivityJournalDetails.vue";
 import SvgIcon from "@jamescoyle/vue-icon";
 import DateNavigation from "./details/DateNavigation.vue";
 import { mdiPlus } from "@mdi/js";
-import { fetchData } from "../../../helpers/api";
 import { startOfWeek, endOfWeek, format, addDays } from "date-fns";
+import { inject } from "vue";
 
 export default {
+    setup() {
+        const useUserActivitiesStore = inject("userActivitiesStore"); //pobranie kontekstu
+        useUserActivitiesStore.fetchActivites(); // uycie funkcji z kontekstu
+        return { useUserActivitiesStore };
+    },
     components: {
         "activity-journal-details": ActivityJournalDetails,
         "date-navigation": DateNavigation,
@@ -55,33 +78,31 @@ export default {
             daysListToActivity: ["Pon", "Wt", "Śr", "Cz", "Pt", "So", "Nd"],
             selectedDay: new Date(),
             tab: new Date().getDay() === 0 ? 6 : new Date().getDay() - 1,
-            selectedActivities: [],
-            daysListToActivity: [],
             currentDate: new Date(),
             currentWeekRange: { weekStart: null, weekEnd: null },
             userName: localStorage.getItem("login"),
-            path: mdiPlus,
         };
     },
     watch: {
-        async selectedDay(newValue, oldValue) {
+        async selectedDay(newValue) {
+            this.useUserActivitiesStore.setCaloriesBurned(newValue);
             try {
-                const response = await fetchData(
-                    `http://localhost:3010/api/user-activities?userName=${
-                        this.userName
-                    }&date=${format(newValue, "yyyy-MM-dd")}`
+                await this.useUserActivitiesStore.fetchActivites(
+                    format(newValue, "yyyy-MM-dd")
                 );
-
-                this.selectedActivities = response.activities || [];
             } catch (error) {
                 console.error("Error fetching activities:", error);
             }
+            this.useUserActivitiesStore.calculateCaloriesBurned(
+                format(newValue, "yyyy-MM-dd")
+            );
         },
     },
     methods: {
         async addActivity(duration, calories_on_hour, name) {
-            const calories = (Number(duration) * Number(calories_on_hour)) / 60;
-
+            const calories = Math.round(
+                (Number(duration) * Number(calories_on_hour)) / 60
+            );
             const activity = {
                 userName: this.userName,
                 name,
@@ -90,29 +111,21 @@ export default {
                 date: this.selectedDay,
             };
 
-            console.log("add activity data", this.selectedDay);
-
-            const { activity: createdActivity } = await fetchData(
-                "http://localhost:3010/api/user-activities",
-                "POST",
-                { ...activity }
+            await this.useUserActivitiesStore.addActivity(
+                activity,
+                this.selectedDay
             );
-
-            this.selectedActivities.push(createdActivity);
         },
+
         async removeActivity(activityId) {
-            this.selectedActivities = this.selectedActivities.filter(
-                ({ _id }) => _id !== activityId
-            );
-            const response = await fetchData(
-                "http://localhost:3010/api/user-activities",
-                "DELETE",
-                { userName: this.userName, activityId }
+            await this.useUserActivitiesStore.removeActivity(
+                activityId,
+                this.selectedDay
             );
         },
+
         previousWeek() {
             const date = new Date(this.selectedDay);
-
             date.setDate(date.getDate() - 7);
             this.selectedDay = format(new Date(date), "yyyy-MM-dd");
             this.generateDaysList();
@@ -157,7 +170,6 @@ export default {
             };
         },
         setSelectedDate(date, index) {
-            console.log("DATE", date);
             this.tab = index;
             this.selectedDay = format(new Date(date), "yyyy-MM-dd");
         },
@@ -167,16 +179,9 @@ export default {
         this.generateWeekRange();
         this.selectedDay = format(this.currentDate, "yyyy-MM-dd");
         this.user = localStorage.getItem("");
-        try {
-            console.log("THIS SELECTED DAY MOUNTED", this.selectedDay);
-            const response = await fetchData(
-                `http://localhost:3010/api/user-activities?userName=${this.userName}&date=${this.selectedDay}`
-            );
-            console.log("aktywności yzytkownika ", response);
-            this.selectedActivities = response.activities || [];
-        } catch (error) {
-            console.error("Error fetching activities:", error);
-        }
+
+        await this.useUserActivitiesStore.fetchActivites(this.selectedDay);
+        this.useUserActivitiesStore.calculateCaloriesBurned(this.selectedDay);
     },
 };
 </script>
@@ -205,5 +210,15 @@ export default {
     background-color: rgba(47, 125, 40, 0.5);
     color: white !important;
 }
-
+.burnedCalories {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    color: #2f7d28;
+    font-size: 20px;
+    font-weight: 300;
+}
+.burnedCaloriesValue {
+    font-weight: 350;
+}
 </style>

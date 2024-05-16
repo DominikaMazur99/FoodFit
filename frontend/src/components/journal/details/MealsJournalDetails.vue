@@ -130,7 +130,6 @@ export default {
             weight: ref(""),
             mealType: "",
             user: "",
-            productList: [],
         };
     },
     methods: {
@@ -175,8 +174,6 @@ export default {
                 }
 
                 const responseData = await response.json();
-
-                this.productList.push(responseData);
             } catch (err) {
                 console.error("Error adding ingredient to meals list:", err);
             } finally {

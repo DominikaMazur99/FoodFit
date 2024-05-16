@@ -117,7 +117,6 @@
     </div>
 </template>
 <script>
-import { checkAndUpdate } from "../../../helpers/api";
 import {
     sexOptions,
     workActivityLevelOptions,
@@ -131,6 +130,7 @@ import InputField from "../inputComponents/InputField.vue";
 import SubmitButton from "../buttons/SubmitButton.vue";
 import ErrorModal from "../modals/ErrorModal.vue";
 import { ref } from "vue";
+import { fetchData } from "../../../helpers/api";
 
 export default {
     components: {
@@ -140,7 +140,6 @@ export default {
         "submit-button": SubmitButton,
         "error-modal": ErrorModal,
     },
-
     methods: {
         calculate() {
             if (this.validateFields() === true) {
@@ -181,14 +180,14 @@ export default {
             }
             console.log("zapotrzebowanie kaloryczne: ", this.caloricDemand);
 
-            checkAndUpdate(
-                "http://localhost:3010/api/calculator",
+            console.log("tthisusername", this.userName);
+
+            fetchData(
+                `http://localhost:3010/api/users/${this.userName}`,
+                "PATCH",
                 {
-                    user_id: 190, // to powinna byc tak samo wartosc dla uzytkownika
-                    caloric_demand: this.caloricDemand,
-                },
-                100
-                // tu trzeba będzie podmienic liczbę na wartość pobrana dla zalogowanego uzytkownika
+                    caloricDemand: this.caloricDemand,
+                }
             );
         },
         calculateActivityFactor() {
@@ -331,6 +330,7 @@ export default {
             workActivityLevelOptions: workActivityLevelOptions,
             freeTimeActivityLevelOptions: freeTimeActivityLevelOptions,
             dietGoalOptions: dietGoalOptions,
+            userName: localStorage.getItem("login"),
         };
     },
 };
