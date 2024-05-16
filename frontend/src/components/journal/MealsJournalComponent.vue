@@ -118,7 +118,6 @@ export default {
 
             date.setDate(date.getDate() + 7);
             this.selectedDay = format(new Date(date), "yyyy-MM-dd");
-            console.log(this.selectedDay);
             this.generateDaysList();
             this.generateWeekRange();
         },
@@ -168,7 +167,6 @@ export default {
             this.fetchData();
         },
         async fetchCaloricDemand() {
-            console.log("fetchCaloricDemand");
             try {
                 const { caloricDemand } = await fetchData(
                     `http://localhost:3010/api/users/${this.userName}/caloricDemand`

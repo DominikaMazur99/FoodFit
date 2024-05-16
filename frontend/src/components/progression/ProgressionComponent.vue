@@ -149,7 +149,6 @@ export default {
                     `http://localhost:3010/api/user-activities?userName=${user}`
                 );
                 const data = await response.json();
-                console.log("User activities:", data);
 
                 if (!data.activities || !Array.isArray(data.activities)) {
                     console.error("Invalid activities data:", data.activities);
@@ -157,7 +156,6 @@ export default {
                 }
 
                 this.activities = data.activities;
-                console.log("Chart data:", this.chartData.datasets[0].data);
             } catch (error) {
                 console.error("Error fetching activities:", error);
             }

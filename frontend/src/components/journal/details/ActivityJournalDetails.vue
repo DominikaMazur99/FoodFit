@@ -92,11 +92,7 @@ export default {
         };
     },
     methods: {
-        handleClick() {
-            console.log("click");
-        },
         addTraining() {
-            console.log("add training");
             this.dialog = true;
         },
         updateActivitiesOptions(event) {
@@ -109,7 +105,6 @@ export default {
         updateDuration(event) {
             const inputValue = event.target.value;
             this.duration = inputValue;
-            console.log("czas trwania: ", this.duration);
         },
     },
     async mounted() {
@@ -119,7 +114,6 @@ export default {
                 "GET",
                 {}
             );
-            console.log("aktywności: ", response);
             //mapujemy dane z bazy aby pasowaly do reużywalnego select boxa (dodanie label)
             this.activitiesOptions = response.map((activity) => ({
                 label: activity.name,

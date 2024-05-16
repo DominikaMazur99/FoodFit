@@ -30,34 +30,6 @@ export default {
     data: () => ({
         tab: null,
     }),
-    methods: {
-        add() {
-            const apiUrl = "http://localhost:3010";
-            const requestOptions = {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    date: "2024-05-02",
-                    calories: "150",
-                }),
-            };
-
-            fetch(`${apiUrl}/api/meals`, requestOptions)
-                .then((response) => {
-                    console.log(response);
-                    if (!response.ok) {
-                        throw new Error("Network response was not ok");
-                    }
-                    return response.json();
-                })
-                .then((data) => {
-                    console.log("data", data);
-                })
-                .catch((error) => {
-                    console.error("Error adding product:", error);
-                });
-        },
-    },
 };
 </script>
 

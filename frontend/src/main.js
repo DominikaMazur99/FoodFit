@@ -14,8 +14,6 @@ const vuetify = createVuetify({
     directives,
 });
 
-console.log("MAIN", userActivitiesStore);
-
 const app = createApp(App);
 
 app.use(router);

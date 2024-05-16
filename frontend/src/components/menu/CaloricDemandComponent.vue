@@ -163,24 +163,18 @@ export default {
             }
             let totalMetabolism =
                 basalMetabolicRate * this.calculateActivityFactor();
-            console.log("poziom aktywnosci", this.calculateActivityFactor());
             //zaleznosc od celu diety:
             if (this.dietGoal === "deficit") {
                 this.caloricDemand = Math.round(
                     totalMetabolism - totalMetabolism * 0.15
                 );
             } else if (this.dietGoal === "surplus") {
-                console.log("nadwyzke");
                 this.caloricDemand = Math.round(
                     totalMetabolism + totalMetabolism * 0.15
                 );
             } else if (this.dietGoal === "maintenance") {
-                console.log("maintenance");
                 this.caloricDemand = Math.round(totalMetabolism);
             }
-            console.log("zapotrzebowanie kaloryczne: ", this.caloricDemand);
-
-            console.log("tthisusername", this.userName);
 
             fetchData(
                 `http://localhost:3010/api/users/${this.userName}`,

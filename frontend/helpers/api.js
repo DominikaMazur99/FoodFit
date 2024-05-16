@@ -27,15 +27,12 @@ export const checkAndUpdate = async (url, data = {}, userId) => {
             const existingEntry = existingData.find(
                 (entry) => Number(entry.user_id) === Number(userId)
             );
-            console.log(existingEntry);
             if (existingEntry) {
                 // Jeśli istnieje wpis, zaktualizuj go za pomocą PATCH
                 await fetchData(`${url}/${existingEntry._id}`, "PATCH", data);
-                console.log("Entry updated successfully");
             } else {
                 // Jeśli nie istnieje wpis, utwórz nowy za pomocą POST
                 await fetchData(url, "POST", data);
-                console.log("New entry added successfully");
             }
         } else {
             throw new Error(`Error ${response.status}: ${response.statusText}`);
@@ -60,7 +57,6 @@ export const checkAndRegister = async (
                     entry.userName.toLowerCase() === userLogin.toLowerCase()
             );
             if (existingEntry) {
-                console.log("użytkownik istnieje w bazie, zaloguj się");
                 updateProps({
                     show: true,
                     color: "red",
@@ -68,7 +64,6 @@ export const checkAndRegister = async (
                     text: "Taki użytkownik już istnieje, spróbuj się zalogować.",
                 });
             } else {
-                console.log("jestem");
                 await fetchData(url, "POST", data);
                 updateProps({
                     show: true,
