@@ -46,7 +46,7 @@
                 {{
                     this.useUserActivitiesStore.caloriesBurned[
                         this?.selectedDay
-                    ]
+                    ].toFixed(2)
                 }}
             </div>
         </div>
